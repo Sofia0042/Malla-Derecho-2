@@ -33,23 +33,27 @@ function actualizarEstadoRamos() {
   });
 }
 
-// 🚀 Aprueba un ramo al hacer clic
+// 🚀 Aprueba un ramo al hacer clic, con animación
 function aprobarRamo(boton) {
-  boton.classList.add('aprobado');
+  boton.classList.add('aprobado', 'destacado');
   boton.disabled = false;
   boton.setAttribute('data-bloqueado', 'false');
-  actualizarEstadoRamos(); // Actualiza el resto después de aprobar
+
+  // 🌟 Remueve el efecto brillante después de 1 segundo
+  setTimeout(() => {
+    boton.classList.remove('destacado');
+  }, 1000);
+
+  actualizarEstadoRamos();
 }
 
 // 📦 Inicializa el sistema una vez que la página está lista
 document.addEventListener('DOMContentLoaded', () => {
-  actualizarEstadoRamos(); // Estado inicial
+  actualizarEstadoRamos();
 
-  // Escucha los clics en los ramos
   const todosLosRamos = document.querySelectorAll('.ramo');
   todosLosRamos.forEach(boton => {
     boton.addEventListener('click', () => {
-      // Solo permite aprobar si no está bloqueado
       if (boton.getAttribute('data-bloqueado') !== 'true') {
         aprobarRamo(boton);
       }
