@@ -18,22 +18,23 @@ body {
   margin-bottom: 40px;
 }
 
-/* Grilla de semestres como columnas */
+/* Wrapper con scroll */
 .grid-malla-wrapper {
   max-width: 100%;
   overflow-x: auto;
   padding-bottom: 10px;
 }
 
+/* Grilla principal de semestres (versión escritorio) */
 .grid-malla {
   display: grid;
   grid-template-columns: repeat(10, 180px); /* Fija 10 columnas exactas */
   gap: 16px;
   margin-bottom: 30px;
-  width: max-content; /* Permite expandirse horizontalmente */
+  width: max-content;
 }
 
-/* Scroll horizontal estilizado (opcional) */
+/* Scroll horizontal estilizado */
 .grid-malla-wrapper::-webkit-scrollbar {
   height: 8px;
 }
@@ -73,7 +74,7 @@ body {
   width: 100%;
 }
 
-/* Ramos aprobados (clickeados) */
+/* Ramos aprobados */
 .ramo.aprobado {
   background-color: #f4a590;
   color: white;
@@ -86,12 +87,12 @@ body {
   cursor: not-allowed;
 }
 
-/* Efecto hover para ramos activos */
+/* Efecto hover */
 .ramo:hover:not([data-bloqueado="true"]) {
   transform: scale(1.03);
 }
 
-/* Bloques extra: Formación Fundamental y Optativos */
+/* Bloques extra */
 .bloque-extra {
   background-color: #f4a590;
   padding: 20px;
@@ -112,10 +113,20 @@ body {
   font-family: 'Dancing Script', cursive;
 }
 
-/* Botones dentro de Formación Fundamental y Optativos */
-.ramo.fundamental, .ramo.optativo {
+/* Botones en bloques extra */
+.ramo.fundamental,
+.ramo.optativo {
   background-color: #fae1ce;
   color: #49241f;
   font-size: 16px;
   margin: 5px;
+}
+
+/* 🌐 Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .grid-malla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+  }
 }
