@@ -113,14 +113,12 @@
       }
     }
 
-    /* 🌟 Efecto brillante al aprobar */
     .ramo.destacado {
       box-shadow: 0 0 10px #f4a590;
       transform: scale(1.05);
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
-    /* 🎉 Challa flotante */
     .challa {
       position: absolute;
       pointer-events: none;
@@ -140,33 +138,34 @@
 
   <div class="grid-malla-wrapper">
     <div class="grid-malla">
-      <div class="columna" id="semestre1"><h2>1º Semestre</h2><button class="ramo">DER1010</button></div>
-      <div class="columna" id="semestre2"><h2>2º Semestre</h2><button class="ramo">DER1020</button></div>
-      <div class="columna" id="semestre3"><h2>3º Semestre</h2><button class="ramo">DER1030</button></div>
-      <div class="columna" id="semestre4"><h2>4º Semestre</h2><button class="ramo">DER1040</button></div>
-      <div class="columna" id="semestre5"><h2>5º Semestre</h2><button class="ramo">DER1050</button></div>
-      <div class="columna" id="semestre6"><h2>6º Semestre</h2><button class="ramo">DER1060</button></div>
-      <div class="columna" id="semestre7"><h2>7º Semestre</h2><button class="ramo">DER1070</button></div>
-      <div class="columna" id="semestre8"><h2>8º Semestre</h2><button class="ramo">DER1080</button></div>
-      <div class="columna" id="semestre9"><h2>9º Semestre</h2><button class="ramo">DER1090</button></div>
-      <div class="columna" id="semestre10"><h2>10º Semestre</h2><button class="ramo">DER1100</button></div>
+      <!-- Cada botón con ID correspondiente -->
+      <div class="columna" id="semestre1"><h2>1º Semestre</h2><button class="ramo" id="DER1010">DER1010</button></div>
+      <div class="columna" id="semestre2"><h2>2º Semestre</h2><button class="ramo" id="DER1020">DER1020</button></div>
+      <div class="columna" id="semestre3"><h2>3º Semestre</h2><button class="ramo" id="DER1030">DER1030</button></div>
+      <div class="columna" id="semestre4"><h2>4º Semestre</h2><button class="ramo" id="DER1040">DER1040</button></div>
+      <div class="columna" id="semestre5"><h2>5º Semestre</h2><button class="ramo" id="DER1050">DER1050</button></div>
+      <div class="columna" id="semestre6"><h2>6º Semestre</h2><button class="ramo" id="DER1060">DER1060</button></div>
+      <div class="columna" id="semestre7"><h2>7º Semestre</h2><button class="ramo" id="DER1070">DER1070</button></div>
+      <div class="columna" id="semestre8"><h2>8º Semestre</h2><button class="ramo" id="DER1080">DER1080</button></div>
+      <div class="columna" id="semestre9"><h2>9º Semestre</h2><button class="ramo" id="DER1090">DER1090</button></div>
+      <div class="columna" id="semestre10"><h2>10º Semestre</h2><button class="ramo" id="DER1100">DER1100</button></div>
     </div>
   </div>
 
   <div class="bloque-extra">
     <h2>Formación Fundamental</h2>
-    <button class="ramo fundamental">Antropología Cristiana</button>
-    <button class="ramo fundamental">Ética Cristiana</button>
-    <button class="ramo fundamental">Fundamental III</button>
-    <button class="ramo fundamental">Fundamental IV</button>
-    <button class="ramo fundamental">Fundamental V</button>
+    <button class="ramo fundamental" id="FUND1">Antropología Cristiana</button>
+    <button class="ramo fundamental" id="FUND2">Ética Cristiana</button>
+    <button class="ramo fundamental" id="FUND3">Fundamental III</button>
+    <button class="ramo fundamental" id="FUND4">Fundamental IV</button>
+    <button class="ramo fundamental" id="FUND5">Fundamental V</button>
   </div>
 
   <div class="bloque-extra">
     <h2>Cursos Optativos</h2>
-    <button class="ramo optativo">Optativo I</button>
-    <button class="ramo optativo">Optativo II</button>
-    <button class="ramo optativo">Optativo III</button>
+    <button class="ramo optativo" id="OPT1">Optativo I</button>
+    <button class="ramo optativo" id="OPT2">Optativo II</button>
+    <button class="ramo optativo" id="OPT3">Optativo III</button>
   </div>
 
   <script>
@@ -193,34 +192,19 @@
         });
       }
 
-      botones.forEach(boton => {
-        boton.addEventListener('click', () => {
-          if (boton.getAttribute('data-bloqueado') === 'true') return;
-          boton.classList.add('aprobado', 'destacado');
+      function aprobarRamo(boton) {
+        boton.classList.add('aprobado', 'destacado');
+        boton.disabled = false;
+        boton.setAttribute('data-bloqueado', 'false');
 
-          setTimeout(() => {
-            boton.classList.remove('destacado');
-          }, 1000);
+        setTimeout(() => {
+          boton.classList.remove('destacado');
+        }, 1000);
 
-          const challa = document.createElement('div');
-          challa.classList.add('challa');
-          challa.textContent = '🎉';
-          document.body.appendChild(challa);
+        const challa = document.createElement('div');
+        challa.classList.add('challa');
+        challa.textContent = '🎉';
+        document.body.appendChild(challa);
 
-          const rect = boton.getBoundingClientRect();
-          challa.style.left = `${rect.left + rect.width / 2}px`;
-          challa.style.top = `${rect.top + window.scrollY}px`;
-
-          setTimeout(() => {
-            challa.remove();
-          }, 1200);
-
-          actualizarEstado();
-        });
-      });
-
-      actualizarEstado();
-    });
-  </script>
-</body>
-</html>
+        const rect = boton.getBoundingClientRect();
+        challa.style.left = `${rect.left +
