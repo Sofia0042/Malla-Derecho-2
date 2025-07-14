@@ -34,6 +34,10 @@ body {
   overflow-x: auto;
   padding-bottom: 10px;
   width: max-content; /* NUEVO: Permite que la grilla se expanda horizontalmente */
+<div class="grid-malla-wrapper">
+  <div class="grid-malla">
+    <!-- Tus columnas -->
+  </div>
 }
 
 .grid-malla-wrapper {
