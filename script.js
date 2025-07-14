@@ -11,7 +11,6 @@ function actualizarEstadoRamos() {
   const todosLosRamos = document.querySelectorAll('.ramo');
 
   todosLosRamos.forEach(boton => {
-    // Si el ramo ya fue aprobado, no lo bloqueamos
     if (boton.classList.contains('aprobado')) {
       boton.disabled = false;
       boton.setAttribute('data-bloqueado', 'false');
@@ -19,35 +18,47 @@ function actualizarEstadoRamos() {
     }
 
     const datos = boton.dataset.prerrequisitos;
-
     if (datos) {
       const prerrequisitos = datos.split(',').map(p => p.trim());
       const habilitado = prerrequisitosCumplidos(prerrequisitos);
       boton.disabled = !habilitado;
       boton.setAttribute('data-bloqueado', habilitado ? 'false' : 'true');
     } else {
-      // Si no tiene prerrequisitos, está habilitado desde el inicio
       boton.disabled = false;
       boton.setAttribute('data-bloqueado', 'false');
     }
   });
 }
 
-// 🚀 Aprueba un ramo al hacer clic, con animación
+// 🚀 Aprueba un ramo con animación y challa digital
 function aprobarRamo(boton) {
   boton.classList.add('aprobado', 'destacado');
   boton.disabled = false;
   boton.setAttribute('data-bloqueado', 'false');
 
-  // 🌟 Remueve el efecto brillante después de 1 segundo
+  // 🌟 Brillo visual
   setTimeout(() => {
     boton.classList.remove('destacado');
   }, 1000);
 
+  // 🎉 Crea challa flotante
+  const challa = document.createElement('div');
+  challa.classList.add('challa');
+  challa.textContent = '🎉';
+  document.body.appendChild(challa);
+
+  const rect = boton.getBoundingClientRect();
+  challa.style.left = `${rect.left + rect.width / 2}px`;
+  challa.style.top = `${rect.top + window.scrollY}px`;
+
+  setTimeout(() => {
+    challa.remove();
+  }, 1200);
+
   actualizarEstadoRamos();
 }
 
-// 📦 Inicializa el sistema una vez que la página está lista
+// 📦 Inicializa el sistema
 document.addEventListener('DOMContentLoaded', () => {
   actualizarEstadoRamos();
 
