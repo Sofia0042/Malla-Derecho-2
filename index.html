@@ -12,7 +12,7 @@
       margin: 0;
       padding: 30px;
       position: relative;
-      overflow-x: hidden;
+      overflow-x: auto;
     }
 
     .titulo {
@@ -81,84 +81,152 @@
       transform: scale(1.03);
     }
 
-    .bloque-extra {
-      background-color: #f4a590;
-      padding: 20px;
-      margin: 30px auto;
-      border-radius: 10px;
-      max-width: 90%;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .bloque-extra h2 {
-      text-align: center;
-      font-size: 20px;
-      color: white;
-      margin-bottom: 15px;
-      font-family: 'Dancing Script', cursive;
-    }
-
-    .ramo.fundamental,
-    .ramo.optativo {
-      background-color: #fae1ce;
-      color: #49241f;
-      font-size: 16px;
-      margin: 5px;
-    }
-
-    @media (max-width: 768px) {
-      .grid-malla {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        width: 100%;
-      }
-    }
-
     .ramo.destacado {
       box-shadow: 0 0 10px #f4a590;
       transform: scale(1.05);
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
-    .challa {
-      position: absolute;
-      pointer-events: none;
-      font-size: 28px;
-      animation: volar 1s ease-out forwards;
-      z-index: 999;
+    .challa-papelito {
+      position: fixed;
+      top: -20px;
+      width: 8px;
+      height: 14px;
+      background-color: #f4a590;
+      opacity: 0.8;
+      border-radius: 3px;
+      animation: caer-challa 2s ease-out forwards;
+      z-index: 9999;
     }
 
-    @keyframes volar {
-      0%   { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-60px) scale(1.5); opacity: 0; }
+    @keyframes caer-challa {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
   <h1 class="titulo">Malla Curricular Derecho</h1>
-
   <div class="grid-malla-wrapper">
     <div class="grid-malla">
-      <!-- Cada botón con ID correspondiente -->
-      <div class="columna" id="semestre1"><h2>1º Semestre</h2><button class="ramo" id="DER1010">DER1010</button></div>
-      <div class="columna" id="semestre2"><h2>2º Semestre</h2><button class="ramo" id="DER1020">DER1020</button></div>
-      <div class="columna" id="semestre3"><h2>3º Semestre</h2><button class="ramo" id="DER1030">DER1030</button></div>
-      <div class="columna" id="semestre4"><h2>4º Semestre</h2><button class="ramo" id="DER1040">DER1040</button></div>
-      <div class="columna" id="semestre5"><h2>5º Semestre</h2><button class="ramo" id="DER1050">DER1050</button></div>
-      <div class="columna" id="semestre6"><h2>6º Semestre</h2><button class="ramo" id="DER1060">DER1060</button></div>
-      <div class="columna" id="semestre7"><h2>7º Semestre</h2><button class="ramo" id="DER1070">DER1070</button></div>
-      <div class="columna" id="semestre8"><h2>8º Semestre</h2><button class="ramo" id="DER1080">DER1080</button></div>
-      <div class="columna" id="semestre9"><h2>9º Semestre</h2><button class="ramo" id="DER1090">DER1090</button></div>
-      <div class="columna" id="semestre10"><h2>10º Semestre</h2><button class="ramo" id="DER1100">DER1100</button></div>
+            <!-- 🧠 PRIMER SEMESTRE -->
+      <div class="columna">
+        <h2>1º Semestre</h2>
+        <button class="ramo" id="DER1010">Historia del Pensamiento Político y Teoría del Estado</button>
+        <button class="ramo" id="DER1011">Fuentes, Proceso y Bienes en el Derecho Romano</button>
+        <button class="ramo" id="DER1012">Historia del Derecho Antiguo y Medieval</button>
+        <button class="ramo" id="DER1013">Fundamentos de Filosofía Práctica</button>
+        <button class="ramo" id="DER1015">Introducción al Estudio del Derecho Positivo Chileno</button>
+        <button class="ramo" id="DER1016">Taller de Memoria 1</button>
+        <button class="ramo" id="ING9001">Inglés 1</button>
+      </div>
+
+      <!-- 📘 SEGUNDO SEMESTRE -->
+      <div class="columna">
+        <h2>2º Semestre</h2>
+        <button class="ramo" id="DER1020" data-prerrequisitos="DER1010">Teoría de la Constitución e Historia Política y Constitucional de Chile</button>
+        <button class="ramo" id="DER1021" data-prerrequisitos="DER1011">Familia y Patrimonio en el Derecho Romano</button>
+        <button class="ramo" id="DER1022" data-prerrequisitos="DER1012">Historia del Derecho Moderno y Contemporáneo</button>
+        <button class="ramo" id="DER1023" data-prerrequisitos="DER1013">Teoría de la Normatividad</button>
+        <button class="ramo" id="DER1024" data-prerrequisitos="DER1015">Judicatura</button>
+        <button class="ramo" id="ING9002" data-prerrequisitos="ING9001">Inglés 2</button>
+      </div>
+
+      <!-- 📚 TERCER SEMESTRE -->
+      <div class="columna">
+        <h2>3º Semestre</h2>
+        <button class="ramo" id="DER1030" data-prerrequisitos="DER1015,DER1020,DER1010,DER1011,DER1012,DER1013">Derecho Constitucional Orgánico</button>
+        <button class="ramo" id="DER1031" data-prerrequisitos="DER1015,DER1020,DER1010,DER1011,DER1012,DER1013">Derecho Internacional Público</button>
+        <button class="ramo" id="DER1032" data-prerrequisitos="DER1015,DER1010,DER1021,DER1011,DER1012,DER1013">Negocio Jurídico</button>
+        <button class="ramo" id="DER2034" data-prerrequisitos="DER1015,DER1010,DER1011,DER1012,DER1013">Estrategias de Producción del Discurso Oral</button>
+        <button class="ramo" id="DER1035" data-prerrequisitos="DER1024,DER1010,DER1011,DER1012,DER1013,DER1015">Tutela Judicial Efectiva y Debido Proceso</button>
+        <button class="ramo" id="DER1036" data-prerrequisitos="DER1016">Taller de Memoria 2</button>
+        <button class="ramo" id="ING9003" data-prerrequisitos="ING9002">Inglés 3</button>
+      </div>
+
+      <!-- ⚖️ CUARTO SEMESTRE -->
+      <div class="columna">
+        <h2>4º Semestre</h2>
+        <button class="ramo" id="DER1040" data-prerrequisitos="DER1015,DER1010,DER1020,DER1011,DER1012,DER1013">Derechos Fundamentales</button>
+        <button class="ramo" id="DER1041" data-prerrequisitos="DER1015,DER1032,DER1021,DER1010,DER1011,DER1012,DER1013">Bienes</button>
+        <button class="ramo" id="DER1042" data-prerrequisitos="DER1035,DER1015,DER1010,DER1011,DER1012,DER1013">Disposiciones Comunes a Todo Procedimiento</button>
+        <button class="ramo" id="DER1043" data-prerrequisitos="DER1015,DER1023,DER1010,DER1011,DER1012,DER1013">Teoría del Delito</button>
+        <button class="ramo" id="ING9004" data-prerrequisitos="ING9003">Inglés 4</button>
+      </div>
+
+      <!-- 💼 QUINTO SEMESTRE -->
+      <div class="columna">
+        <h2>5º Semestre</h2>
+        <button class="ramo" id="DER1050" data-prerrequisitos="DER1030,DER1040">Bases del Derecho Administrativo</button>
+        <button class="ramo" id="DER1051" data-prerrequisitos="DER1015,DER1032,DER1010,DER1011,DER1012,DER1013">Derecho Individual del Trabajo</button>
+        <button class="ramo" id="DER1052" data-prerrequisitos="DER1040">Derecho y Orden Económico</button>
+        <button class="ramo" id="DER1053" data-prerrequisitos="DER1032,DER1041,DER1021">Obligaciones y Contratos</button>
+        <button class="ramo" id="DER1055" data-prerrequisitos="DER1043">Responsabilidad Penal</button>
+        <button class="ramo" id="DER1056" data-prerrequisitos="DER1036">Taller de Memoria 3</button>
+        <button class="ramo" id="DER1057" data-prerrequisitos="DER1042">Juicio Declarativo y Prueba</button>
+      </div>
+
+      <!-- 📖 SEXTO SEMESTRE -->
+      <div class="columna">
+        <h2>6º Semestre</h2>
+        <button class="ramo" id="DER1060" data-prerrequisitos="DER1050,DER1032">Actuación de la Administración del Estado</button>
+        <button class="ramo" id="DER1061" data-prerrequisitos="DER1051">Derecho Colectivo del Trabajo</button>
+        <button class="ramo" id="DER1062" data-prerrequisitos="DER1052">Regulación Económica y Derecho de la Libre Competencia</button>
+        <button class="ramo" id="DER1063" data-prerrequisitos="DER1053,DER1032,DER1041">Responsabilidad Civil</button>
+        <button class="ramo" id="DER1064" data-prerrequisitos="DER1057">Recursos Procesales</button>
+        <button class="ramo" id="DER1065" data-prerrequisitos="DER1055">Delito contra Intereses Individuales</button>
+        <button class="ramo" id="DER1066" data-prerrequisitos="DER1035">Negociación y Formas Autocompositivas de Resolución de Conflictos</button>
+      </div>
+
+      <!-- 🏛️ SÉPTIMO SEMESTRE -->
+      <div class="columna">
+        <h2>7º Semestre</h2>
+        <button class="ramo" id="DER1070" data-prerrequisitos="DER1057,DER1060,DER1063">Control y Responsabilidad de la Administración del Estado</button>
+        <button class="ramo" id="DER1071" data-prerrequisitos="DER1015,DER1010,DER1011,DER1012,DER1013">Introducción al Derecho Comercial y Organización Jurídica de la Empresa</button>
+        <button class="ramo" id="DER1072" data-prerrequisitos="DER1052,DER1062">Derecho de los Mercados Financieros</button>
+        <button class="ramo" id="DER1073" data-prerrequisitos="DER1063,DER1053,DER1032,DER1041,DER1021">Contratos en Particular</button>
+        <button class="ramo" id="DER1076" data-prerrequisitos="DER1056">Taller de Memoria 4</button>
+        <button        <button class="ramo" id="DER1077" data-prerrequisitos="DER1064">Ejecución y Tutela Cautelar</button>
+      </div>
+
+      <!-- 🚨 OCTAVO SEMESTRE -->
+      <div class="columna">
+        <h2>8º Semestre</h2>
+        <button class="ramo" id="DER1075" data-prerrequisitos="DER1064,DER1065">Derecho Procesal Penal</button>
+        <button class="ramo" id="DER1080" data-prerrequisitos="DER1071">Derecho Tributario</button>
+        <button class="ramo" id="DER1081" data-prerrequisitos="DER1071,DER1073">Sociedades de Capital</button>
+        <button class="ramo" id="DER1082" data-prerrequisitos="DER1023">Teoría del Ordenamiento Jurídico</button>
+        <button class="ramo" id="DER1083" data-prerrequisitos="DER1073,DER1063,DER1053,DER1032,DER1041,DER1021">Familia</button>
+        <button class="ramo" id="DER1084" data-prerrequisitos="DER1057">Litigación Oral</button>
+      </div>
+
+      <!-- 🎓 NOVENO SEMESTRE -->
+      <div class="columna">
+        <h2>9º Semestre</h2>
+        <button class="ramo" id="DER1090">Pasantía Profesional</button>
+        <button class="ramo" id="DER1091" data-prerrequisitos="DER1081">Derecho Concursal y de Seguros</button>
+        <button class="ramo" id="DER1092">Filosofía del Derecho y Teorías de la Justicia</button>
+        <button class="ramo" id="DER1093" data-prerrequisitos="DER1083,DER1073,DER1063,DER1053,DER1032,DER1041,DER1021">Sucesiones</button>
+        <button class="ramo" id="DER1094">Ética Profesional</button>
+        <button class="ramo" id="DER1096" data-prerrequisitos="DER1075,DER1080,DER1081,DER1082,DER1083,DER1084,DER1016,DER1036,DER1056,DER1076">Memoria</button>
+      </div>
+
+      <!-- 🏆 DÉCIMO SEMESTRE -->
+      <div class="columna">
+        <h2>10º Semestre</h2>
+        <button class="ramo" id="DER1100">Licenciatura</button>
+      </div>
     </div>
   </div>
 
+  <!-- ✨ BLOQUES EXTRA -->
   <div class="bloque-extra">
-    <h2>Formación Fundamental</h2>
-    <button class="ramo fundamental" id="FUND1">Antropología Cristiana</button>
-    <button class="ramo fundamental" id="FUND2">Ética Cristiana</button>
-    <button class="ramo fundamental" id="FUND3">Fundamental III</button>
-    <button class="ramo fundamental" id="FUND4">Fundamental IV</button>
-    <button class="ramo fundamental" id="FUND5">Fundamental V</button>
+    <h2>Formación Fundamental (FOFUs)</h2>
+    <button class="ramo fundamental" id="FOFU1">Antropología Cristiana</button>
+    <button class="ramo fundamental" id="FOFU2">Ética Cristiana</button>
+    <button class="ramo fundamental" id="FOFU3">FOFU 3</button>
+    <button class="ramo fundamental" id="FOFU4">FOFU 4</button>
+    <button class="ramo fundamental" id="FOFU5">FOFU 5</button>
   </div>
 
   <div class="bloque-extra">
@@ -168,43 +236,72 @@
     <button class="ramo optativo" id="OPT3">Optativo III</button>
   </div>
 
+  <!-- 🧠 SCRIPT -->
   <script>
+    function prerrequisitosCumplidos(prerrequisitos) {
+      return prerrequisitos.every(id => {
+        const ramo = document.getElementById(id);
+        return ramo && ramo.classList.contains('aprobado');
+      });
+    }
+
+    function actualizarEstadoRamos() {
+      const todosLosRamos = document.querySelectorAll('.ramo');
+      todosLosRamos.forEach(boton => {
+        if (boton.classList.contains('aprobado')) {
+          boton.disabled = false;
+          boton.setAttribute('data-bloqueado', 'false');
+          return;
+        }
+        const datos = boton.dataset.prerrequisitos;
+        if (datos) {
+          const prerrequisitos = datos.split(',').map(p => p.trim());
+          const habilitado = prerrequisitosCumplidos(prerrequisitos);
+          boton.disabled = !habilitado;
+          boton.setAttribute('data-bloqueado', habilitado ? 'false' : 'true');
+        } else {
+          boton.disabled = false;
+          boton.setAttribute('data-bloqueado', 'false');
+        }
+      });
+    }
+
+    function lanzarChalla() {
+      for (let i = 0; i < 30; i++) {
+        const papelito = document.createElement('div');
+        papelito.classList.add('challa-papelito');
+        papelito.style.left = `${Math.random() * window.innerWidth}px`;
+        const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829'];
+        papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+        document.body.appendChild(papelito);
+        setTimeout(() => papelito.remove(), 2000);
+      }
+    }
+
+    function aprobarRamo(boton) {
+      boton.classList.add('aprobado', 'destacado');
+      boton.disabled = false;
+      boton.setAttribute('data-bloqueado', 'false');
+
+      setTimeout(() => {
+        boton.classList.remove('destacado');
+      }, 1000);
+
+      lanzarChalla();
+      actualizarEstadoRamos();
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      const botones = document.querySelectorAll('.ramo');
-
-      function actualizarEstado() {
-        botones.forEach(boton => {
-          if (boton.classList.contains('aprobado')) return;
-
-          const requisitos = boton.dataset.prerrequisitos;
-          if (requisitos) {
-            const ids = requisitos.split(',').map(id => id.trim());
-            const cumplidos = ids.every(id => {
-              const prereq = document.getElementById(id);
-              return prereq && prereq.classList.contains('aprobado');
-            });
-            boton.disabled = !cumplidos;
-            boton.setAttribute('data-bloqueado', (!cumplidos).toString());
-          } else {
-            boton.disabled = false;
-            boton.setAttribute('data-bloqueado', 'false');
+      actualizarEstadoRamos();
+      const todosLosRamos = document.querySelectorAll('.ramo');
+      todosLosRamos.forEach(boton => {
+        boton.addEventListener('click', () => {
+          if (boton.getAttribute('data-bloqueado') !== 'true') {
+            aprobarRamo(boton);
           }
         });
-      }
-
-      function aprobarRamo(boton) {
-        boton.classList.add('aprobado', 'destacado');
-        boton.disabled = false;
-        boton.setAttribute('data-bloqueado', 'false');
-
-        setTimeout(() => {
-          boton.classList.remove('destacado');
-        }, 1000);
-
-        const challa = document.createElement('div');
-        challa.classList.add('challa');
-        challa.textContent = '🎉';
-        document.body.appendChild(challa);
-
-        const rect = boton.getBoundingClientRect();
-        challa.style.left = `${rect.left +
+      });
+    });
+  </script>
+</body>
+</html>
