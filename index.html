@@ -163,7 +163,7 @@
         <button class="ramo" id="DER1056" data-creditos="1" data-prerrequisitos="DER1036">Taller de Memoria 3</button>
         <button class="ramo" id="DER1057" data-creditos="3" data-prerrequisitos="DER1042">Juicio Declarativo y Prueba</button>
       </div>
-            <!-- 📖 6º a 10º Semestre -->
+            <!-- 📖 6º Semestre -->
       <div class="columna">
         <h2>6º Semestre</h2>
         <button class="ramo" id="DER1060" data-creditos="3" data-prerrequisitos="DER1050,DER1032">Actuación de la Administración del Estado</button>
@@ -230,91 +230,89 @@
     <button class="ramo optativo" id="OPT5">Optativo V</button>
     <button class="ramo optativo" id="OPT6">Optativo VI</button>
   </div>
+    <script>
+    let creditosTotales = 0;
 
- <script>
-let creditosTotales = 0;
-
-function contarFOFUs() {
-  return Array.from(document.querySelectorAll('.ramo.fundamental')).filter(r => r.classList.contains('aprobado')).length;
-}
-
-function contarOptativos() {
-  return Array.from(document.querySelectorAll('.ramo.optativo')).filter(r => r.classList.contains('aprobado')).length;
-}
-
-function prerrequisitosCumplidos(prerrequisitos) {
-  return prerrequisitos.every(id => {
-    const ramo = document.getElementById(id);
-    return ramo && ramo.classList.contains('aprobado');
-  });
-}
-
-function actualizarEstadoRamos() {
-  const todos = document.querySelectorAll('.ramo');
-  todos.forEach(boton => {
-    const datos = boton.dataset.prerrequisitos;
-    const creditosMin = boton.dataset.requiereCreditos;
-    const fofusMin = boton.dataset.requiereFofus;
-    const optativosMin = boton.dataset.requiereOptativos;
-
-    let habilitado = true;
-
-    if (datos) {
-      const prereqs = datos.split(',').map(p => p.trim());
-      if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
+    function contarFOFUs() {
+      return Array.from(document.querySelectorAll('.ramo.fundamental')).filter(r => r.classList.contains('aprobado')).length;
     }
 
-    if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
-    if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
-    if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
+    function contarOptativos() {
+      return Array.from(document.querySelectorAll('.ramo.optativo')).filter(r => r.classList.contains('aprobado')).length;
+    }
 
-    boton.disabled = !habilitado;
-    boton.setAttribute('data-bloqueado', (!habilitado).toString());
-  });
-}
+    function prerrequisitosCumplidos(prerrequisitos) {
+      return prerrequisitos.every(id => {
+        const ramo = document.getElementById(id);
+        return ramo && ramo.classList.contains('aprobado');
+      });
+    }
 
-function lanzarChalla() {
-  for (let i = 0; i < 100; i++) {
-    const papelito = document.createElement('div');
-    papelito.classList.add('challa-papelito');
-    papelito.style.left = `${Math.random() * window.innerWidth}px`;
-    papelito.style.transform = `rotate(${Math.random() * 360}deg)`;
-    const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829', '#e1c1d2'];
-    papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
-    papelito.style.width = `${Math.random() * 10 + 6}px`;
-    papelito.style.height = `${Math.random() * 14 + 8}px`;
-    papelito.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-    document.body.appendChild(papelito);
-    setTimeout(() => papelito.remove(), 3500);
-  }
-}
+    function actualizarEstadoRamos() {
+      document.querySelectorAll('.ramo').forEach(boton => {
+        const datos = boton.dataset.prerrequisitos;
+        const creditosMin = boton.dataset.requiereCreditos;
+        const fofusMin = boton.dataset.requiereFofus;
+        const optativosMin = boton.dataset.requiereOptativos;
 
-function aprobarRamo(boton) {
-  if (!boton.classList.contains('aprobado')) {
-    boton.classList.add('aprobado', 'destacado');
+        let habilitado = true;
 
-    const creditos = parseInt(boton.dataset.creditos) || 0;
-    creditosTotales += creditos;
+        if (datos) {
+          const prereqs = datos.split(',').map(p => p.trim());
+          if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
+        }
 
-    setTimeout(() => {
-      boton.classList.remove('destacado');
-    }, 1000);
+        if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
+        if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
+        if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
 
-    lanzarChalla();
-    actualizarEstadoRamos();
-  }
-}
+        boton.disabled = !habilitado;
+        boton.setAttribute('data-bloqueado', (!habilitado).toString());
+      });
+    }
 
-document.addEventListener('DOMContentLoaded', () => {
-  actualizarEstadoRamos();
-  document.querySelectorAll('.ramo').forEach(boton => {
-    boton.addEventListener('click', () => {
-      if (boton.getAttribute('data-bloqueado') !== 'true') {
-        aprobarRamo(boton);
+    function lanzarChalla() {
+      for (let i = 0; i < 100; i++) {
+        const papelito = document.createElement('div');
+        papelito.classList.add('challa-papelito');
+        papelito.style.left = `${Math.random() * window.innerWidth}px`;
+        papelito.style.transform = `rotate(${Math.random() * 360}deg)`;
+        const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829', '#e1c1d2'];
+        papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+        papelito.style.width = `${Math.random() * 10 + 6}px`;
+        papelito.style.height = `${Math.random() * 14 + 8}px`;
+        papelito.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
+        document.body.appendChild(papelito);
+        setTimeout(() => papelito.remove(), 3500);
       }
+    }
+
+    function aprobarRamo(boton) {
+      if (!boton.classList.contains('aprobado')) {
+        boton.classList.add('aprobado', 'destacado');
+
+        const creditos = parseInt(boton.dataset.creditos) || 0;
+        creditosTotales += creditos;
+
+        setTimeout(() => {
+          boton.classList.remove('destacado');
+        }, 1000);
+
+        lanzarChalla();
+        actualizarEstadoRamos();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      actualizarEstadoRamos();
+      document.querySelectorAll('.ramo').forEach(boton => {
+        boton.addEventListener('click', () => {
+          if (boton.getAttribute('data-bloqueado') !== 'true') {
+            aprobarRamo(boton);
+          }
+        });
+      });
     });
-  });
-});
-</script>
+  </script>
 </body>
 </html>
