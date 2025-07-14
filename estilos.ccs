@@ -1,81 +1,104 @@
-/* 💻 Tipografía */
-@import url('https://fonts.googleapis.com/css2?family=Rosario&display=swap');
+/* Tipografías elegantes */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rosario&display=swap');
 
 body {
   background-color: #faf4ea;
   font-family: 'Rosario', sans-serif;
   color: #49241f;
   margin: 0;
-  padding: 20px;
+  padding: 30px;
 }
 
-/* 📘 Título principal */
-h1 {
-  font-family: 'Bryndan White', cursive;
-  color: #bd4829;
+/* Título principal */
+.titulo {
+  font-family: 'Dancing Script', cursive;
   font-size: 50px;
   text-align: center;
+  color: #bd4829;
   margin-bottom: 40px;
 }
 
-/* 📚 Semestres */
-.contenedor-malla {
+/* Malla: columnas semestrales */
+.grid-malla {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4px;
+  flex-direction: row;
   justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.4px;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
-.semestre {
+/* Cada columna */
+.columna {
   background-color: #99c2c6;
-  padding: 20px;
-  margin: 10px;
+  padding: 15px;
   border-radius: 10px;
-  min-width: 300px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  min-width: 150px;
+  max-width: 180px;
+  margin: 0 5px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
-.semestre h2 {
-  font-size: 22px;
+.columna h2 {
+  text-align: center;
   color: #49241f;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
-/* 📘 Ramos */
+/* Botones de ramo */
 .ramo {
-  display: block;
-  width: 100%;
-  margin: 4px 0;
-  padding: 10px;
   background-color: #fae1ce;
   color: #49241f;
   border: none;
   border-radius: 6px;
+  padding: 10px;
+  margin: 5px 0;
   font-size: 19px;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-family: 'Rosario', sans-serif;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
-/* 🔒 Inactivo */
+/* Ramos bloqueados */
 .ramo[data-bloqueado="true"] {
-  background-color: #d3c1b2;
+  opacity: 0.5;
   cursor: not-allowed;
-  opacity: 0.6;
 }
 
-/* ✅ Aprobado */
+/* Ramos aprobados */
 .ramo.aprobado {
   background-color: #f4a590;
-  color: #fff;
+  color: white;
   font-weight: bold;
 }
 
-/* 🧠 Formación fundamental y optativos */
-.ramo.fundamental, .ramo.optativo {
-  background-color: #fae1ce;
+/* Hover solo en ramos desbloqueados */
+.ramo:hover:not([data-bloqueado="true"]) {
+  transform: scale(1.03);
 }
 
-.ramo:hover:not([data-bloqueado="true"]) {
-  transform: scale(1.02);
+/* Secciones extra: Formación Fundamental y Optativos */
+.bloque-extra {
+  background-color: #f4a590;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 90%;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.bloque-extra h2 {
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Botones en secciones extra */
+.ramo.fundamental, .ramo.optativo {
+  background-color: #fae1ce;
+  font-size: 19px;
 }
