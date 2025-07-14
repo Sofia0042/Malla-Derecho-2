@@ -129,4 +129,10 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     width: 100%;
   }
+/* 🌟 Efecto brillante al aprobar un ramo */
+.ramo.destacado {
+  box-shadow: 0 0 10px #f4a590;
+  transform: scale(1.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
 }
