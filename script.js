@@ -87,19 +87,36 @@
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
+    .bloque-extra {
+      margin-top: 40px;
+    }
+
+    .bloque-extra h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #bd4829;
+    }
+
     .challa-papelito {
       position: fixed;
-      top: -20px;
-      background-color: #f4a590;
-      opacity: 0.85;
-      border-radius: 3px;
-      animation: caer-challa 3.5s ease-out forwards;
       z-index: 9999;
+      border-radius: 3px;
+      animation: caer-challa linear forwards;
     }
 
     @keyframes caer-challa {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(-30px) translateY(50vh) rotate(180deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateX(30px) translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -108,31 +125,33 @@
   <div class="grid-malla-wrapper">
     <div class="grid-malla">
 
-      <!-- 🧠 Tu grilla de semestres va aquí -->
-      <!-- Puedes insertar los bloques que ya hemos generado para 1º al 10º semestre -->
+      <!-- Aquí van todos los ramos de 1º a 10º semestre -->
+      <!-- Para mantener este mensaje fluido, puedes copiar directamente los bloques que te envié anteriormente con todos los ramos estructurados -->
+      <!-- Asegúrate de insertarlos dentro de este <div class="grid-malla"> -->
 
     </div>
   </div>
 
+  <!-- FOFUs -->
   <div class="bloque-extra">
     <h2>Formación Fundamental (FOFUs)</h2>
-    <button class="ramo fundamental" id="FOFU1">Antropología Cristiana</button>
-    <button class="ramo fundamental" id="FOFU2">Ética Cristiana</button>
-    <button class="ramo fundamental" id="FOFU3">FOFU 3</button>
-    <button class="ramo fundamental" id="FOFU4">FOFU 4</button>
-    <button class="ramo fundamental" id="FOFU5">FOFU 5</button>
+    <button class="ramo fundamental" id="FOFU1" data-creditos="0">Antropología Cristiana</button>
+    <button class="ramo fundamental" id="FOFU2" data-creditos="0">Ética Cristiana</button>
+    <button class="ramo fundamental" id="FOFU3" data-creditos="0">FOFU 3</button>
+    <button class="ramo fundamental" id="FOFU4" data-creditos="0">FOFU 4</button>
+    <button class="ramo fundamental" id="FOFU5" data-creditos="0">FOFU 5</button>
   </div>
 
+  <!-- Optativos -->
   <div class="bloque-extra">
     <h2>Cursos Optativos</h2>
-    <button class="ramo optativo" id="OPT1">Optativo I</button>
-    <button class="ramo optativo" id="OPT2">Optativo II</button>
-    <button class="ramo optativo" id="OPT3">Optativo III</button>
-    <button class="ramo optativo" id="OPT4">Optativo IV</button>
-    <button class="ramo optativo" id="OPT5">Optativo V</button>
-    <button class="ramo optativo" id="OPT6">Optativo VI</button>
+    <button class="ramo optativo" id="OPT1" data-creditos="0">Optativo I</button>
+    <button class="ramo optativo" id="OPT2" data-creditos="0">Optativo II</button>
+    <button class="ramo optativo" id="OPT3" data-creditos="0">Optativo III</button>
+    <button class="ramo optativo" id="OPT4" data-creditos="0">Optativo IV</button>
+    <button class="ramo optativo" id="OPT5" data-creditos="0">Optativo V</button>
+    <button class="ramo optativo" id="OPT6" data-creditos="0">Optativo VI</button>
   </div>
-
   <script>
     let creditosTotales = 0;
 
@@ -177,32 +196,31 @@
     }
 
     function lanzarChalla() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 1500; i++) {
         const papelito = document.createElement('div');
         papelito.classList.add('challa-papelito');
         papelito.style.left = `${Math.random() * window.innerWidth}px`;
+        papelito.style.top = `-${Math.random() * 100 + 20}px`;
         papelito.style.transform = `rotate(${Math.random() * 360}deg)`;
         const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829', '#e1c1d2'];
         papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
         papelito.style.width = `${Math.random() * 10 + 6}px`;
         papelito.style.height = `${Math.random() * 14 + 8}px`;
         papelito.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
+        papelito.style.animationDuration = `${2 + Math.random() * 3}s`;
         document.body.appendChild(papelito);
-        setTimeout(() => papelito.remove(), 3500);
+        setTimeout(() => papelito.remove(), 5000);
       }
     }
 
     function aprobarRamo(boton) {
       if (!boton.classList.contains('aprobado')) {
         boton.classList.add('aprobado', 'destacado');
-
         const creditos = parseInt(boton.dataset.creditos) || 0;
         creditosTotales += creditos;
-
         setTimeout(() => {
           boton.classList.remove('destacado');
         }, 1000);
-
         lanzarChalla();
         actualizarEstadoRamos();
       }
