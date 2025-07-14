@@ -21,9 +21,8 @@ body {
 /* Grilla de semestres como columnas */
 .grid-malla {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr); /* Fuerza 10 columnas iguales */
   gap: 16px;
-  justify-content: center;
   margin-bottom: 30px;
 }
 
