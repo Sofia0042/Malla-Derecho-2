@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rosario&display=swap');
 
+/* Fondo general */
 body {
   background-color: #faf4ea;
   font-family: 'Rosario', sans-serif;
@@ -8,9 +9,10 @@ body {
   padding: 30px;
 }
 
+/* Título principal */
 .titulo {
   font-family: 'Dancing Script', cursive;
-  font-size: 50px;
+  font-size: 48px;
   text-align: center;
   color: #bd4829;
   margin-bottom: 40px;
@@ -19,8 +21,8 @@ body {
 /* Grilla de semestres como columnas */
 .grid-malla {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 16px;
   justify-content: center;
   margin-bottom: 30px;
 }
@@ -30,17 +32,17 @@ body {
   background-color: #99c2c6;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
 }
 
 .columna h2 {
   text-align: center;
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 18px;
   color: #49241f;
+  margin-bottom: 10px;
 }
 
-/* Botón de ramo */
+/* Botones de ramo */
 .ramo {
   background-color: #fae1ce;
   color: #49241f;
@@ -48,29 +50,56 @@ body {
   border-radius: 6px;
   padding: 10px;
   margin: 6px 0;
-  font-size: 17px;
+  font-size: 16px;
   cursor: pointer;
   font-family: 'Rosario', sans-serif;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease;
   width: 100%;
 }
 
-/* Ramo aprobado */
+/* Ramos aprobados (clickeados) */
 .ramo.aprobado {
   background-color: #f4a590;
   color: white;
   font-weight: bold;
 }
 
-/* Ramo bloqueado */
+/* Ramos bloqueados por prerrequisitos */
 .ramo[data-bloqueado="true"] {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-/* Hover suave */
+/* Efecto hover para ramos activos */
 .ramo:hover:not([data-bloqueado="true"]) {
   transform: scale(1.03);
 }
 
-/* Se
+/* Bloques extra: Formación Fundamental y Optativos */
+.bloque-extra {
+  background-color: #f4a590;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.bloque-extra h2 {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  margin-bottom: 15px;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Botones dentro de Formación Fundamental y Optativos */
+.ramo.fundamental, .ramo.optativo {
+  background-color: #fae1ce;
+  color: #49241f;
+  font-size: 16px;
+  margin: 5px;
+}
