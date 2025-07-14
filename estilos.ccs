@@ -19,10 +19,14 @@ body {
 }
 
 /* Grilla de semestres como columnas */
-.grid-malla-wrapper {
-  overflow-x: auto;
+.grid-malla {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  width: 1800px; /* Valor fijo para contener 10 columnas de 180px */
 }
-
 .grid-malla {
   display: grid;
   grid-template-columns: repeat(10, minmax(180px, 1fr));
