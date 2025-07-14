@@ -4,53 +4,37 @@
   <meta charset="UTF-8" />
   <title>Malla Curricular Derecho</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rosario&display=swap" rel="stylesheet">
- <style>
-  body {
-    background-color: #faf4ea;
-    font-family: 'Rosario', sans-serif;
-    color: #49241f;
-    margin: 0;
-    padding: 30px;
-  }
+  <style>
+    body {
+      background-color: #faf4ea;
+      font-family: 'Rosario', sans-serif;
+      color: #49241f;
+      margin: 0;
+      padding: 30px;
+    }
 
-  .titulo {
-    font-family: 'Dancing Script', cursive;
-    font-size: 48px;
-    text-align: center;
-    color: #bd4829;
-    margin-bottom: 40px;
-  }
+    .titulo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      text-align: center;
+      color: #bd4829;
+      margin-bottom: 40px;
+    }
 
-  .grid-malla-wrapper {
-    max-width: 100%;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
+    .grid-malla-wrapper {
+      max-width: 100%;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
 
-  .grid-malla {
-    display: grid;
-    grid-template-columns: repeat(10, 180px);
-    gap: 16px;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    width: max-content;
-  }
-</style>
-
-   .grid-malla-wrapper {
-  max-width: 100%;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.grid-malla {
-  display: grid;
-  grid-template-columns: repeat(10, 180px); /* 10 columnas de ancho fijo */
-  gap: 16px;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
-  width: max-content; /* Permite que el grid crezca más allá de la pantalla */
-}
+    .grid-malla {
+      display: grid;
+      grid-template-columns: repeat(10, 180px); /* 10 columnas de ancho fijo */
+      gap: 16px;
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      width: max-content; /* Permite que el grid crezca más allá de la pantalla */
+    }
 
     .columna {
       background-color: #99c2c6;
@@ -115,8 +99,7 @@
       font-family: 'Dancing Script', cursive;
     }
 
-    .ramo.fundamental,
-    .ramo.optativo {
+    .ramo.fundamental, .ramo.optativo {
       background-color: #fae1ce;
       color: #49241f;
       font-size: 16px;
@@ -128,49 +111,65 @@
   <h1 class="titulo">Malla Curricular Derecho</h1>
 
   <div class="grid-malla-wrapper">
-  <div class="grid-malla">
-    <div class="columna" id="semestre1">
-      <h2>1º Semestre</h2>
-      <button class="ramo">DER1010</button>
-    </div>
-    <div class="columna" id="semestre2">
-      <h2>2º Semestre</h2>
-      <button class="ramo">DER1020</button>
-    </div>
-    <div class="columna" id="semestre3">
-      <h2>3º Semestre</h2>
-      <button class="ramo">DER1030</button>
-    </div>
-    <div class="columna" id="semestre4">
-      <h2>4º Semestre</h2>
-      <button class="ramo">DER1040</button>
-    </div>
-    <div class="columna" id="semestre5">
-      <h2>5º Semestre</h2>
-      <button class="ramo">DER1050</button>
-    </div>
-    <div class="columna" id="semestre6">
-      <h2>6º Semestre</h2>
-      <button class="ramo">DER1060</button>
-    </div>
-    <div class="columna" id="semestre7">
-      <h2>7º Semestre</h2>
-      <button class="ramo">DER1070</button>
-    </div>
-    <div class="columna" id="semestre8">
-      <h2>8º Semestre</h2>
-      <button class="ramo">DER1080</button>
-    </div>
-    <div class="columna" id="semestre9">
-      <h2>9º Semestre</h2>
-      <button class="ramo">DER1090</button>
-    </div>
-    <div class="columna" id="semestre10">
-      <h2>10º Semestre</h2>
-      <button class="ramo">DER1100</button>
+    <div class="grid-malla">
+      <div class="columna" id="semestre1">
+        <h2>1º Semestre</h2>
+        <button class="ramo">DER1010</button>
+      </div>
+      <div class="columna" id="semestre2">
+        <h2>2º Semestre</h2>
+        <button class="ramo">DER1020</button>
+      </div>
+      <div class="columna" id="semestre3">
+        <h2>3º Semestre</h2>
+        <button class="ramo">DER1030</button>
+      </div>
+      <div class="columna" id="semestre4">
+        <h2>4º Semestre</h2>
+        <button class="ramo">DER1040</button>
+      </div>
+      <div class="columna" id="semestre5">
+        <h2>5º Semestre</h2>
+        <button class="ramo">DER1050</button>
+      </div>
+      <div class="columna" id="semestre6">
+        <h2>6º Semestre</h2>
+        <button class="ramo">DER1060</button>
+      </div>
+      <div class="columna" id="semestre7">
+        <h2>7º Semestre</h2>
+        <button class="ramo">DER1070</button>
+      </div>
+      <div class="columna" id="semestre8">
+        <h2>8º Semestre</h2>
+        <button class="ramo">DER1080</button>
+      </div>
+      <div class="columna" id="semestre9">
+        <h2>9º Semestre</h2>
+        <button class="ramo">DER1090</button>
+      </div>
+      <div class="columna" id="semestre10">
+        <h2>10º Semestre</h2>
+        <button class="ramo">DER1100</button>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="bloque-extra">
+    <h2>Formación Fundamental</h2>
+    <button class="ramo fundamental">Antropología Cristiana</button>
+    <button class="ramo fundamental">Ética Cristiana</button>
+    <button class="ramo fundamental">Fundamental III</button>
+    <button class="ramo fundamental">Fundamental IV</button>
+    <button class="ramo fundamental">Fundamental V</button>
+  </div>
+
+  <div class="bloque-extra">
+    <h2>Cursos Optativos</h2>
+    <button class="ramo optativo">Optativo I</button>
+    <button class="ramo optativo">Optativo II</button>
+    <button class="ramo optativo">Optativo III</button>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
