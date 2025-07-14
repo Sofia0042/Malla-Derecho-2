@@ -29,7 +29,8 @@ body {
   gap: 16px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-  width: max-content;
+  max-width: 100%;      /* Limita el ancho máximo a la pantalla */
+  overflow-x: auto;     /* Scroll si se necesita */
 }
 
 .grid-malla-wrapper {
