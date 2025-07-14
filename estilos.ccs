@@ -21,23 +21,17 @@ body {
 /* Grilla de semestres como columnas */
 .grid-malla {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* Fuerza 10 columnas */
-  gap: 16px;
-  margin-bottom: 30px;
-  overflow-x: auto; /* Agrega scroll horizontal */
-  padding-bottom: 10px;
-.grid-malla {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(150px, 1fr));
+  grid-template-columns: repeat(10, minmax(180px, 1fr)); /* Ajusta tamaño mínimo */
   gap: 16px;
   margin-bottom: 30px;
   overflow-x: auto;
   padding-bottom: 10px;
-  width: max-content; /* NUEVO: Permite que la grilla se expanda horizontalmente */
-<div class="grid-malla-wrapper">
-  <div class="grid-malla">
-    <!-- Tus columnas -->
-  </div>
+  width: max-content; /* Esta línea es clave */
+}
+
+.grid-malla-wrapper {
+  overflow-x: auto;
+}
 }
 
 .grid-malla-wrapper {
