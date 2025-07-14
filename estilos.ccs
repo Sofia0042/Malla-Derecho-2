@@ -35,7 +35,6 @@ body {
 .grid-malla-wrapper {
   overflow-x: auto;
 }
-}
 
 /* Cada columna de semestre */
 .columna {
