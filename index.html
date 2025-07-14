@@ -110,11 +110,11 @@
         opacity: 1;
       }
       50% {
-        transform: translateY(50vh) translateX(-40px) rotate(180deg);
+        transform: translateY(50vh) translateX(-60px) rotate(180deg);
         opacity: 0.8;
       }
       100% {
-        transform: translateY(100vh) translateX(40px) rotate(360deg);
+        transform: translateY(100vh) translateX(60px) rotate(360deg);
         opacity: 0;
       }
     }
@@ -125,13 +125,87 @@
   <div class="grid-malla-wrapper">
     <div class="grid-malla">
 
-      <!-- 🧠 Inserta aquí todos los bloques <div class="columna"> con ramos del 1º al 10º semestre -->
-      <!-- Usa los fragmentos que te entregué antes con todos los ramos y sus atributos -->
-      <!-- Esto mantiene tu estructura organizada y permite que el script los reconozca -->
-
-    </div>
-  </div>
-
+    <div class="columna">
+  <h2>1º Semestre</h2>
+  <button class="ramo" id="DER1010" data-creditos="4">Historia del Pensamiento Político y Teoría del Estado</button>
+  <button class="ramo" id="DER1011" data-creditos="3">Fuentes, Proceso y Bienes en el Derecho Romano</button>
+  <button class="ramo" id="DER1012" data-creditos="3">Historia del Derecho Antiguo y Medieval</button>
+  <button class="ramo" id="DER1013" data-creditos="3">Fundamentos de Filosofía Práctica</button>
+  <button class="ramo" id="DER1015" data-creditos="3">Introducción al Estudio del Derecho Positivo Chileno</button>
+  <button class="ramo" id="DER1016" data-creditos="1">Taller de Memoria 1</button>
+  <button class="ramo" id="ING9001" data-creditos="2">Inglés 1</button>
+</div>
+      <div class="columna">
+  <h2>2º Semestre</h2>
+  <button class="ramo" id="DER1020" data-creditos="4" data-prerrequisitos="DER1015">Constitución y Sistema Político</button>
+  <button class="ramo" id="DER1021" data-creditos="4" data-prerrequisitos="DER1011">Personas y Familia en el Derecho Privado</button>
+  <button class="ramo" id="DER1022" data-creditos="4" data-prerrequisitos="DER1011">Obligaciones</button>
+  <button class="ramo" id="DER1023" data-creditos="3" data-prerrequisitos="DER1010">Teoría y Argumentación Jurídica</button>
+  <button class="ramo" id="DER1024" data-creditos="3" data-prerrequisitos="DER1010">Constitución y Derechos Fundamentales</button>
+  <button class="ramo" id="DER1025" data-creditos="1" data-prerrequisitos="DER1016">Taller de Memoria 2</button>
+  <button class="ramo" id="ING9002" data-creditos="2" data-prerrequisitos="ING9001">Inglés 2</button>
+</div>
+      <div class="columna">
+  <h2>3º Semestre</h2>
+  <button class="ramo" id="DER1030" data-creditos="4" data-prerrequisitos="DER1020">Derecho Administrativo General</button>
+  <button class="ramo" id="DER1031" data-creditos="3" data-prerrequisitos="DER1022">Contratos</button>
+  <button class="ramo" id="DER1032" data-creditos="4" data-prerrequisitos="DER1021">Sucesiones</button>
+  <button class="ramo" id="DER1033" data-creditos="3" data-prerrequisitos="DER1024">Teoría del Derecho Internacional Público</button>
+  <button class="ramo" id="DER1034" data-creditos="4" data-prerrequisitos="DER1024">Mecanismos de Participación y Control Constitucional</button>
+  <button class="ramo" id="DER1035" data-creditos="1" data-prerrequisitos="DER1025">Taller de Memoria 3</button>
+  <button class="ramo" id="ING9003" data-creditos="2" data-prerrequisitos="ING9002">Inglés 3</button>
+</div>
+      <div class="columna">
+  <h2>4º Semestre</h2>
+  <button class="ramo" id="DER1040" data-creditos="3" data-prerrequisitos="DER1030">Procedimiento Administrativo y Régimen de Empleo Público</button>
+  <button class="ramo" id="DER1041" data-creditos="3" data-prerrequisitos="DER1031,DER1032">Responsabilidad Civil y Derecho del Consumo</button>
+  <button class="ramo" id="DER1042" data-creditos="4" data-prerrequisitos="DER1033">Derecho Internacional de los Derechos Humanos</button>
+  <button class="ramo" id="DER1043" data-creditos="3" data-prerrequisitos="DER1033">Derecho Internacional Humanitario</button>
+  <button class="ramo" id="DER1044" data-creditos="3" data-prerrequisitos="DER1034">Sistema de Justicia Constitucional</button>
+  <button class="ramo" id="DER1045" data-creditos="1" data-prerrequisitos="DER1035">Taller de Memoria 4</button>
+</div>
+      <div class="columna">
+  <h2>5º Semestre</h2>
+  <button class="ramo" id="DER1050" data-creditos="4" data-prerrequisitos="DER1040">Derecho Administrativo Sancionador y Responsabilidad del Estado</button>
+  <button class="ramo" id="DER1051" data-creditos="4" data-prerrequisitos="DER1041">Derecho Comercial y Societario</button>
+  <button class="ramo" id="DER1052" data-creditos="4" data-prerrequisitos="DER1041">Derecho Laboral Individual</button>
+  <button class="ramo" id="DER1053" data-creditos="3" data-prerrequisitos="DER1042,DER1043">Sistema Internacional de Protección de Derechos Humanos</button>
+  <button class="ramo" id="DER1054" data-creditos="3" data-prerrequisitos="DER1044">Derecho Procesal Orgánico</button>
+  <button class="ramo" id="DER1055" data-creditos="1" data-prerrequisitos="DER1045">Taller de Memoria 5</button>
+</div>
+      <div class="columna">
+  <h2>6º Semestre</h2>
+  <button class="ramo" id="DER1060" data-creditos="4" data-prerrequisitos="DER1050">Contratación Pública y Gestión Administrativa</button>
+  <button class="ramo" id="DER1061" data-creditos="3" data-prerrequisitos="DER1051">Títulos de Crédito y Derecho Concursal</button>
+  <button class="ramo" id="DER1062" data-creditos="3" data-prerrequisitos="DER1052">Derecho Laboral Colectivo</button>
+  <button class="ramo" id="DER1063" data-creditos="3" data-prerrequisitos="DER1053">Derecho Internacional Privado</button>
+  <button class="ramo" id="DER1064" data-creditos="3" data-prerrequisitos="DER1054">Teoría General del Proceso</button>
+  <button class="ramo" id="DER1065" data-creditos="1" data-prerrequisitos="DER1055">Taller de Memoria 6</button>
+</div>
+      <div class="columna">
+  <h2>7º Semestre</h2>
+  <button class="ramo" id="DER1070" data-creditos="4" data-prerrequisitos="DER1060">Regulación Económica y Libre Competencia</button>
+  <button class="ramo" id="DER1071" data-creditos="3" data-prerrequisitos="DER1061">Derecho Tributario</button>
+  <button class="ramo" id="DER1072" data-creditos="3" data-prerrequisitos="DER1062">Derecho de la Seguridad Social</button>
+  <button class="ramo" id="DER1073" data-creditos="3" data-prerrequisitos="DER1063">Derecho Civil Internacional</button>
+  <button class="ramo" id="DER1074" data-creditos="4" data-prerrequisitos="DER1064">Procedimiento Civil</button>
+  <button class="ramo" id="DER1075" data-creditos="1" data-prerrequisitos="DER1065">Taller de Memoria 7</button>
+</div>
+      <div class="columna">
+  <h2>8º Semestre</h2>
+  <button class="ramo" id="DER1080" data-creditos="3" data-prerrequisitos="DER1070">Derecho Económico Internacional</button>
+  <button class="ramo" id="DER1081" data-creditos="3" data-prerrequisitos="DER1071">Procedimiento Tributario</button>
+  <button class="ramo" id="DER1082" data-creditos="3" data-prerrequisitos="DER1072">Litigación Laboral</button>
+  <button class="ramo" id="DER1083" data-creditos="3" data-prerrequisitos="DER1073">Arbitraje Internacional</button>
+  <button class="ramo" id="DER1084" data-creditos="4" data-prerrequisitos="DER1074">Litigación y Ejecución Civil</button>
+  <button class="ramo" id="DER1085" data-creditos="1" data-prerrequisitos="DER1075">Taller de Memoria 8</button>
+</div>
+      <div class="columna">
+  <h2>10º Semestre</h2>
+  <button class="ramo" id="DER1100" data-creditos="5" data-prerrequisitos="DER1094" data-requiereFofus="5" data-requiereOptativos="3">Licenciatura</button>
+  <button class="ramo" id="DER1105" data-creditos="1" data-prerrequisitos="DER1095">Taller de Memoria 10</button>
+</div>
+        <!-- 🎓 Formación Fundamental (FOFUs) -->
   <div class="bloque-extra">
     <h2>Formación Fundamental (FOFUs)</h2>
     <button class="ramo fundamental" id="FOFU1" data-creditos="0">Antropología Cristiana</button>
@@ -141,13 +215,16 @@
     <button class="ramo fundamental" id="FOFU5" data-creditos="0">FOFU 5</button>
   </div>
 
+  <!-- 📗 Optativos corregidos -->
   <div class="bloque-extra">
     <h2>Cursos Optativos</h2>
     <button class="ramo optativo" id="OPT1" data-creditos="0">Optativo I</button>
     <button class="ramo optativo" id="OPT2" data-creditos="0">Optativo II</button>
     <button class="ramo optativo" id="OPT3" data-creditos="0">Optativo III</button>
   </div>
-    <script>
+
+  <!-- 🧠 Script interactivo -->
+  <script>
     let creditosTotales = 0;
 
     function contarFOFUs() {
@@ -196,7 +273,7 @@
         papelito.classList.add('challa-papelito');
 
         const startX = Math.random() * window.innerWidth;
-        const startY = -(Math.random() * 100 + 20);
+        const startY = -(Math.random() * 150 + 50);
 
         const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829', '#e1c1d2'];
         papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
@@ -206,7 +283,6 @@
         papelito.style.left = `${startX}px`;
         papelito.style.top = `${startY}px`;
         papelito.style.animation = `caer-challa ${2 + Math.random() * 3}s ease-out forwards`;
-        papelito.style.transform = `translateX(${Math.random() * 60 - 30}px) rotate(${Math.random() * 360}deg)`;
 
         document.body.appendChild(papelito);
         setTimeout(() => papelito.remove(), 5000);
@@ -239,3 +315,24 @@
   </script>
 </body>
 </html>
+
+    </div>
+  </div>
+
+  <!-- 🎓 Formación Fundamental (FOFUs) -->
+  <div class="bloque-extra">
+    <h2>Formación Fundamental (FOFUs)</h2>
+    <button class="ramo fundamental" id="FOFU1" data-creditos="0">Antropología Cristiana</button>
+    <button class="ramo fundamental" id="FOFU2" data-creditos="0">Ética Cristiana</button>
+    <button class="ramo fundamental" id="FOFU3" data-creditos="0">FOFU 3</button>
+    <button class="ramo fundamental" id="FOFU4" data-creditos="0">FOFU 4</button>
+    <button class="ramo fundamental" id="FOFU5" data-creditos="0">FOFU 5</button>
+  </div>
+
+  <!-- 📗 Optativos corregidos -->
+  <div class="bloque-extra">
+    <h2>Cursos Optativos</h2>
+    <button class="ramo optativo" id="OPT1" data-creditos="0">Optativo I</button>
+    <button class="ramo optativo" id="OPT2" data-creditos="0">Optativo II</button>
+    <button class="ramo optativo" id="OPT3" data-creditos="0">Optativo III</button>
+  </div>
