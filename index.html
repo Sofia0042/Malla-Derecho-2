@@ -26,7 +26,83 @@
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 16px;
       margin-bottom: 30px;
-     <div class="columna" id="semestre1">
+    }
+
+    .columna {
+      background-color: #99c2c6;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .columna h2 {
+      text-align: center;
+      font-size: 18px;
+      color: #49241f;
+      margin-bottom: 10px;
+    }
+
+    .ramo {
+      background-color: #fae1ce;
+      color: #49241f;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      margin: 6px 0;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: 'Rosario', sans-serif;
+      transition: transform 0.2s ease;
+      width: 100%;
+    }
+
+    .ramo.aprobado {
+      background-color: #f4a590;
+      color: white;
+      font-weight: bold;
+    }
+
+    .ramo[data-bloqueado="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .ramo:hover:not([data-bloqueado="true"]) {
+      transform: scale(1.03);
+    }
+
+    .bloque-extra {
+      background-color: #f4a590;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .bloque-extra h2 {
+      text-align: center;
+      font-size: 20px;
+      color: white;
+      margin-bottom: 15px;
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .ramo.fundamental, .ramo.optativo {
+      background-color: #fae1ce;
+      color: #49241f;
+      font-size: 16px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="titulo">Malla Curricular Derecho</h1>
+
+  <div class="grid-malla">
+<div class="columna" id="semestre1">
   <h2>Primer Semestre</h2>
   <button class="ramo" id="DER1010">Historia del Pensamiento Político y Teoría del Estado</button>
   <button class="ramo" id="DER1011">Fuentes, Proceso y Bienes en el Derecho Romano</button>
@@ -113,84 +189,7 @@
   <h2>Décimo Semestre</h2>
   <button class="ramo" id="DER1100" data-prerrequisitos="DER1096">Licenciatura</button>
 </div>
-    }
-
-    .columna {
-      background-color: #99c2c6;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .columna h2 {
-      text-align: center;
-      font-size: 18px;
-      color: #49241f;
-      margin-bottom: 10px;
-    }
-
-    .ramo {
-      background-color: #fae1ce;
-      color: #49241f;
-      border: none;
-      border-radius: 6px;
-      padding: 10px;
-      margin: 6px 0;
-      font-size: 16px;
-      cursor: pointer;
-      font-family: 'Rosario', sans-serif;
-      transition: transform 0.2s ease;
-      width: 100%;
-    }
-
-    .ramo.aprobado {
-      background-color: #f4a590;
-      color: white;
-      font-weight: bold;
-    }
-
-    .ramo[data-bloqueado="true"] {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .ramo:hover:not([data-bloqueado="true"]) {
-      transform: scale(1.03);
-    }
-
-    .bloque-extra {
-      background-color: #f4a590;
-      padding: 20px;
-      margin-top: 30px;
-      border-radius: 10px;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .bloque-extra h2 {
-      text-align: center;
-      font-size: 20px;
-      color: white;
-      margin-bottom: 15px;
-      font-family: 'Dancing Script', cursive;
-    }
-
-    .ramo.fundamental, .ramo.optativo {
-      background-color: #fae1ce;
-      color: #49241f;
-      font-size: 16px;
-      margin: 5px;
-    }
-  </style>
-</head>
-<body>
-  <h1 class="titulo">Malla Curricular Derecho</h1>
-
-  <div class="grid-malla">
-    <!-- Aquí van tus columnas de semestres con nombres completos, como ya te los armé -->
-    <!-- Puedes pegar los bloques del Semestre 1 al 10 aquí -->
+    
   </div>
 
   <div class="bloque-extra">
