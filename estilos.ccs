@@ -25,16 +25,8 @@ body {
   gap: 16px;
   margin-bottom: 30px;
   padding-bottom: 10px;
-  width: 1800px; /* Valor fijo para contener 10 columnas de 180px */
-}
-.grid-malla {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(180px, 1fr));
-  gap: 16px;
-  margin-bottom: 30px;
-  padding-bottom: 10px;
   max-width: 100%;      /* Limita el ancho máximo a la pantalla */
-  overflow-x: auto;     /* Scroll si se necesita */
+  overflow-x: auto;
 }
 
 .grid-malla-wrapper {
