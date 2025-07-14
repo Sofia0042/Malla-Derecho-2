@@ -30,7 +30,9 @@ body {
 }
 
 .grid-malla-wrapper {
+  max-width: 100%;
   overflow-x: auto;
+  padding-bottom: 10px; /* agrega un poco de espacio si aparece el scroll */
 }
 
 /* Cada columna de semestre */
