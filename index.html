@@ -25,14 +25,14 @@
       overflow-x: auto;
     }
 
-    .grid-malla {
-      display: grid;
-      grid-template-columns: repeat(10, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-      padding-bottom: 10px;
-      width: max-content;
-    }
+.grid-malla {
+  display: grid;
+  grid-template-columns: repeat(10, 180px); /* 10 columnas de ancho fijo */
+  gap: 16px;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  width: max-content; /* Permite que el grid crezca más allá de la pantalla */
+}
 
     .columna {
       background-color: #99c2c6;
