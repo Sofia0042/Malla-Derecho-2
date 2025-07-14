@@ -106,15 +106,15 @@
 
     @keyframes caer-challa {
       0% {
-        transform: translateX(0) translateY(0) rotate(0deg);
+        transform: translateY(0) translateX(0) rotate(0deg);
         opacity: 1;
       }
       50% {
-        transform: translateX(-30px) translateY(50vh) rotate(180deg);
+        transform: translateY(50vh) translateX(-60px) rotate(180deg);
         opacity: 0.8;
       }
       100% {
-        transform: translateX(30px) translateY(100vh) rotate(360deg);
+        transform: translateY(100vh) translateX(60px) rotate(360deg);
         opacity: 0;
       }
     }
@@ -125,14 +125,23 @@
   <div class="grid-malla-wrapper">
     <div class="grid-malla">
 
-      <!-- Aquí van todos los ramos de 1º a 10º semestre -->
-      <!-- Para mantener este mensaje fluido, puedes copiar directamente los bloques que te envié anteriormente con todos los ramos estructurados -->
-      <!-- Asegúrate de insertarlos dentro de este <div class="grid-malla"> -->
+      <!-- ⚖️ Ejemplo de semestres (puedes insertar los 10 que ya tienes) -->
+      <div class="columna">
+        <h2>1º Semestre</h2>
+        <button class="ramo" id="DER1010" data-creditos="4">Historia del Pensamiento Político</button>
+        <button class="ramo" id="DER1011" data-creditos="3">Fuentes del Derecho Romano</button>
+        <button class="ramo" id="DER1012" data-creditos="3">Historia del Derecho Medieval</button>
+        <button class="ramo" id="DER1013" data-creditos="3">Filosofía Práctica</button>
+        <button class="ramo" id="DER1015" data-creditos="3">Introducción al Derecho Chileno</button>
+        <button class="ramo" id="DER1016" data-creditos="1">Taller de Memoria 1</button>
+      </div>
+
+      <!-- 📘 Agrega aquí los bloques del 2º al 10º semestre (usa los que ya tienes) -->
 
     </div>
   </div>
 
-  <!-- FOFUs -->
+  <!-- 🎓 Formación Fundamental (FOFUs) -->
   <div class="bloque-extra">
     <h2>Formación Fundamental (FOFUs)</h2>
     <button class="ramo fundamental" id="FOFU1" data-creditos="0">Antropología Cristiana</button>
@@ -142,15 +151,12 @@
     <button class="ramo fundamental" id="FOFU5" data-creditos="0">FOFU 5</button>
   </div>
 
-  <!-- Optativos -->
+  <!-- 📗 Optativos corregidos -->
   <div class="bloque-extra">
     <h2>Cursos Optativos</h2>
     <button class="ramo optativo" id="OPT1" data-creditos="0">Optativo I</button>
     <button class="ramo optativo" id="OPT2" data-creditos="0">Optativo II</button>
     <button class="ramo optativo" id="OPT3" data-creditos="0">Optativo III</button>
-    <button class="ramo optativo" id="OPT4" data-creditos="0">Optativo IV</button>
-    <button class="ramo optativo" id="OPT5" data-creditos="0">Optativo V</button>
-    <button class="ramo optativo" id="OPT6" data-creditos="0">Optativo VI</button>
   </div>
   <script>
     let creditosTotales = 0;
@@ -199,15 +205,19 @@
       for (let i = 0; i < 1500; i++) {
         const papelito = document.createElement('div');
         papelito.classList.add('challa-papelito');
-        papelito.style.left = `${Math.random() * window.innerWidth}px`;
-        papelito.style.top = `-${Math.random() * 100 + 20}px`;
-        papelito.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+        const startX = Math.random() * window.innerWidth;
+        const startY = -(Math.random() * 150 + 50);
+
         const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829', '#e1c1d2'];
         papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
         papelito.style.width = `${Math.random() * 10 + 6}px`;
         papelito.style.height = `${Math.random() * 14 + 8}px`;
         papelito.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-        papelito.style.animationDuration = `${2 + Math.random() * 3}s`;
+        papelito.style.left = `${startX}px`;
+        papelito.style.top = `${startY}px`;
+        papelito.style.animation = `caer-challa ${2 + Math.random() * 3}s ease-out forwards`;
+
         document.body.appendChild(papelito);
         setTimeout(() => papelito.remove(), 5000);
       }
