@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular Derecho</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <h1>Malla Curricular Derecho</h1>
+  <div class="contenedor-malla">
+    <!-- PRIMER SEMESTRE -->
+    <section class="semestre" id="semestre1">
+      <h2>Primer Semestre</h2>
+      <button class="ramo" id="DER1010">Historia del Pensamiento Político y Teoría del Estado</button>
+      <button class="ramo" id="DER1011">Fuentes, Proceso y Bienes en el Derecho Romano</button>
+      <button class="ramo" id="DER1012">Historia del Derecho Antiguo y Medieval</button>
+      <button class="ramo" id="DER1013">Fundamentos de Filosofía Práctica</button>
+      <button class="ramo" id="DER1015">Introducción al Estudio del Derecho Positivo Chileno</button>
+      <button class="ramo" id="DER1016">Taller de Memoria 1</button>
+      <button class="ramo" id="ING9001">Inglés 1</button>
+    </section>
 
+    <!-- SEGUNDO SEMESTRE -->
+    <section class="semestre" id="semestre2">
+      <h2>Segundo Semestre</h2>
+      <button class="ramo" id="DER1020" data-prerrequisitos="DER1010">Teoría de la Constitución e Historia Política y Constitucional de Chile</button>
+      <button class="ramo" id="DER1021" data-prerrequisitos="DER1011">Familia y Patrimonio en el Derecho Romano</button>
+      <button class="ramo" id="DER1022" data-prerrequisitos="DER1012">Historia del Derecho Moderno y Contemporáneo</button>
+      <button class="ramo" id="DER1023" data-prerrequisitos="DER1013">Teoría de la Normatividad</button>
+      <button class="ramo" id="DER1024" data-prerrequisitos="DER1015">Judicatura</button>
+      <button class="ramo" id="ING9002" data-prerrequisitos="ING9001">Inglés 2</button>
+    </section>
+
+    <!-- 🧠 Continúo con los semestres 3 al 10 igual de organizados... -->
+    <!-- Puedo seguir insertando toda la malla completa si quieres ya en este momento, o mostrarte paso a paso -->
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
