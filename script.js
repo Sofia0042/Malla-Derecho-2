@@ -33,22 +33,27 @@ function actualizarEstadoRamos() {
 
     let habilitado = true;
 
+    // Evaluar prerrequisitos si existen
     if (datos) {
       const prereqs = datos.split(',').map(id => id.trim());
       if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
     }
 
+    // Evaluar requisitos adicionales
     if (creditosMin && contarCreditosMallaPrincipal() < parseInt(creditosMin)) habilitado = false;
     if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
     if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
 
+    // Licenciatura requiere Memoria aprobada
     if (boton.id === "DER1100") {
       const memoria = document.getElementById("DER1096");
       if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
     }
 
+    // Bloquear por defecto si no tiene ninguna condición y no es FOFU ni Optativo
     const tieneCondicion = datos || creditosMin || fofusMin || optativosMin || boton.id === "DER1100";
-    if (!tieneCondicion) habilitado = false;
+    const esLibre = boton.classList.contains("fundamental") || boton.classList.contains("optativo");
+    if (!tieneCondicion && !esLibre) habilitado = false;
 
     boton.disabled = !habilitado;
     boton.setAttribute('data-bloqueado', (!habilitado).toString());
@@ -74,13 +79,9 @@ function aprobarRamo(boton) {
     boton.classList.add('aprobado', 'destacado');
     const creditos = parseInt(boton.dataset.creditos) || 0;
     creditosTotales += creditos;
-    setTimeout(() => {
-      boton.classList.remove('destacado');
-    }, 1000);
+    setTimeout(() => boton.classList.remove('destacado'), 1000);
     lanzarFuegosArtificiales();
-    setTimeout(() => {
-      actualizarEstadoRamos();
-    }, 50);
+    setTimeout(() => actualizarEstadoRamos(), 50);
   }
 }
 
