@@ -11,6 +11,12 @@
       .filter(r => r.classList.contains('aprobado')).length;
   }
 
+  function contarCreditosMallaPrincipal() {
+    return Array.from(document.querySelectorAll('.ramo:not(.fundamental):not(.optativo)'))
+      .filter(r => r.classList.contains('aprobado'))
+      .reduce((acc, r) => acc + (parseInt(r.dataset.creditos) || 0), 0);
+  }
+
   function prerrequisitosCumplidos(prerrequisitos) {
     return prerrequisitos.every(id => {
       const ramo = document.getElementById(id);
@@ -27,20 +33,23 @@
 
       let habilitado = true;
 
-      // 🔍 Evaluación normal de prerrequisitos
+      // 🔍 Evaluar prerrequisitos normales
       if (datos) {
         const prereqs = datos.split(',').map(p => p.trim());
         if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
       } else {
-        // 🔒 Si no tiene prerrequisitos definidos, lo bloqueamos
+        // 🔒 Bloquear si no tiene prerrequisitos explícitos
         habilitado = false;
       }
 
-      if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
+      // ✅ Evaluar condiciones de créditos requeridos solo por ramos normales
+      if (creditosMin && contarCreditosMallaPrincipal() < parseInt(creditosMin)) habilitado = false;
+
+      // 🎓 Evaluar condiciones adicionales si corresponden
       if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
       if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
 
-      // 👨‍🎓 Caso especial: Licenciatura debe verificar que Memoria ya esté aprobada
+      // 🔐 Caso especial: Licenciatura solo si Memoria está aprobada
       if (boton.id === "DER1100") {
         const memoria = document.getElementById("DER1096");
         if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
@@ -82,7 +91,7 @@
 
       lanzarFuegosArtificiales();
 
-      // ⏳ Micro-delay para que se registre aprobación antes de actualizar la malla
+      // ⏳ Delay para que la aprobación se registre antes de evaluar desbloqueo
       setTimeout(() => {
         actualizarEstadoRamos();
       }, 50);
