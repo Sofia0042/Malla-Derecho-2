@@ -27,17 +27,24 @@
 
       let habilitado = true;
 
-      // ✅ Si no tiene prerrequisitos definidos, bloqueamos por defecto
+      // 🧠 Evaluar prerrequisitos
       if (datos) {
         const prereqs = datos.split(',').map(p => p.trim());
         if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
       } else {
+        // 🔒 Si no tiene prerrequisitos explícitos, se bloquea
         habilitado = false;
       }
 
+      // 🎓 Condiciones adicionales para FOFUs, Optativos, Créditos
       if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
       if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
       if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
+
+      // 👨‍🎓 Caso especial: Licenciatura debe verificar Memoria explícitamente
+      if (boton.id === "DER1100" && !document.getElementById("DER1096").classList.contains("aprobado")) {
+        habilitado = false;
+      }
 
       boton.disabled = !habilitado;
       boton.setAttribute('data-bloqueado', (!habilitado).toString());
