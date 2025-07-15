@@ -102,7 +102,16 @@
 <body>
 <h1 class="titulo">Malla Curricular Derecho</h1>
 <div class="grid-malla-wrapper">
-<div class="grid-malla">
+<div class="grid-malla"><!-- 1º Semestre -->
+<div class="columna"><h2>1º Semestre</h2>
+  <button class="ramo" id="DER1010" data-creditos="4">Historia del Pensamiento Político y Teoría del Estado</button>
+  <button class="ramo" id="DER1011" data-creditos="3">Fuentes, Proceso y Bienes en el Derecho Romano</button>
+  <button class="ramo" id="DER1012" data-creditos="3">Historia del Derecho Antiguo y Medieval</button>
+  <button class="ramo" id="DER1013" data-creditos="3">Fundamentos de Filosofía Práctica</button>
+  <button class="ramo" id="DER1015" data-creditos="3">Introducción al Estudio del Derecho Positivo Chileno</button>
+  <button class="ramo" id="DER1016" data-creditos="1">Taller de Memoria 1</button>
+  <button class="ramo" id="ING9001" data-creditos="2">Inglés 1</button>
+</div>
 
 <!-- 1º Semestre -->
 <div class="columna"><h2>1º Semestre</h2>
@@ -177,7 +186,7 @@
   <button class="ramo" id="DER1077" data-creditos="3" data-prerrequisitos="DER1064">Ejecución y Tutela Cautelar</button>
 </div>
 
-    <!-- 8º Semestre -->
+<!-- 8º Semestre -->
 <div class="columna"><h2>8º Semestre</h2>
   <button class="ramo" id="DER1075" data-creditos="4" data-prerrequisitos="DER1064,DER1065">Derecho Procesal Penal</button>
   <button class="ramo" id="DER1080" data-creditos="3" data-prerrequisitos="DER1071">Derecho Tributario</button>
@@ -206,7 +215,8 @@
     data-requiereOptativos="3">
     Licenciatura
   </button>
-</div><!-- Formación Fundamental (FOFUs) -->
+</div>
+<!-- Formación Fundamental (FOFUs) -->
 <div class="bloque-extra">
   <h2>Formación Fundamental (FOFUs)</h2>
   <button class="ramo fundamental" id="FOFU1" data-creditos="2">Antropología Cristiana</button>
@@ -224,7 +234,7 @@
   <button class="ramo optativo" id="OPT3" data-creditos="2">Optativo III</button>
 </div>
 
-<!-- Script final con lógica de desbloqueo -->
+<!-- Script corregido -->
 <script>
 let creditosTotales = 0;
 
@@ -239,13 +249,14 @@ function contarOptativos() {
 }
 
 function contarCreditosMallaPrincipal() {
-  return Array.from(document.querySelectorAll('.ramo:not(.fundamental):not(.optativo)'))
+  return Array.from(document.querySelectorAll('.ramo'))
+    .filter(r => !r.classList.contains('fundamental') && !r.classList.contains('optativo'))
     .filter(r => r.classList.contains('aprobado'))
     .reduce((acc, r) => acc + (parseInt(r.dataset.creditos) || 0), 0);
 }
 
-function prerrequisitosCumplidos(prerrequisitos) {
-  return prerrequisitos.every(id => {
+function prerrequisitosCumplidos(listaIDs) {
+  return listaIDs.every(id => {
     const ramo = document.getElementById(id);
     return ramo && ramo.classList.contains('aprobado');
   });
@@ -261,7 +272,7 @@ function actualizarEstadoRamos() {
     let habilitado = true;
 
     if (datos) {
-      const prereqs = datos.split(',').map(p => p.trim());
+      const prereqs = datos.split(',').map(id => id.trim());
       if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
     }
 
@@ -274,9 +285,9 @@ function actualizarEstadoRamos() {
       if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
     }
 
-    if (!datos && !creditosMin && !fofusMin && !optativosMin && boton.id !== "DER1100") {
-      habilitado = false;
-    }
+    const tieneCondicion = datos || creditosMin || fofusMin || optativosMin || boton.id === "DER1100";
+    const esLibre = boton.classList.contains("fundamental") || boton.classList.contains("optativo");
+    if (!tieneCondicion && !esLibre) habilitado = false;
 
     boton.disabled = !habilitado;
     boton.setAttribute('data-bloqueado', (!habilitado).toString());
@@ -302,13 +313,9 @@ function aprobarRamo(boton) {
     boton.classList.add('aprobado', 'destacado');
     const creditos = parseInt(boton.dataset.creditos) || 0;
     creditosTotales += creditos;
-    setTimeout(() => {
-      boton.classList.remove('destacado');
-    }, 1000);
+    setTimeout(() => boton.classList.remove('destacado'), 1000);
     lanzarFuegosArtificiales();
-    setTimeout(() => {
-      actualizarEstadoRamos();
-    }, 50);
+    setTimeout(() => actualizarEstadoRamos(), 50);
   }
 }
 
