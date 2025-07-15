@@ -27,23 +27,23 @@
 
       let habilitado = true;
 
-      // 🧠 Evaluar prerrequisitos
+      // 🔍 Evaluación normal de prerrequisitos
       if (datos) {
         const prereqs = datos.split(',').map(p => p.trim());
         if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
       } else {
-        // 🔒 Si no tiene prerrequisitos explícitos, se bloquea
+        // 🔒 Si no tiene prerrequisitos definidos, lo bloqueamos
         habilitado = false;
       }
 
-      // 🎓 Condiciones adicionales para FOFUs, Optativos, Créditos
       if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
       if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
       if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
 
-      // 👨‍🎓 Caso especial: Licenciatura debe verificar Memoria explícitamente
-      if (boton.id === "DER1100" && !document.getElementById("DER1096").classList.contains("aprobado")) {
-        habilitado = false;
+      // 👨‍🎓 Caso especial: Licenciatura debe verificar que Memoria ya esté aprobada
+      if (boton.id === "DER1100") {
+        const memoria = document.getElementById("DER1096");
+        if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
       }
 
       boton.disabled = !habilitado;
@@ -81,7 +81,11 @@
       }, 1000);
 
       lanzarFuegosArtificiales();
-      actualizarEstadoRamos();
+
+      // ⏳ Micro-delay para que se registre aprobación antes de actualizar la malla
+      setTimeout(() => {
+        actualizarEstadoRamos();
+      }, 50);
     }
   }
 
