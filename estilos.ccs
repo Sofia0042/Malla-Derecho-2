@@ -1,259 +1,108 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Malla Curricular Derecho</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rosario&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Rosario&display=swap');
+<style>
+  body {
+    background-color: #faf4ea;
+    font-family: 'Rosario', sans-serif;
+    color: #49241f;
+    margin: 0;
+    padding: 30px;
+    position: relative;
+    overflow-x: auto;
+  }
 
-    body {
-      background-color: #faf4ea;
-      font-family: 'Rosario', sans-serif;
-      color: #49241f;
-      margin: 0;
-      padding: 30px;
-      position: relative;
-      overflow-x: hidden;
-    }
+  .titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    text-align: center;
+    color: #bd4829;
+    margin-bottom: 40px;
+  }
 
-    .titulo {
-      font-family: 'Dancing Script', cursive;
-      font-size: 48px;
-      text-align: center;
-      color: #bd4829;
-      margin-bottom: 40px;
-    }
+  .grid-malla-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
 
-    .grid-malla-wrapper {
-      max-width: 100%;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
+  .grid-malla {
+    display: grid;
+    grid-template-columns: repeat(10, 180px);
+    gap: 16px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    width: max-content;
+  }
 
-    .grid-malla {
-      display: grid;
-      grid-template-columns: repeat(10, 180px);
-      gap: 16px;
-      margin-bottom: 30px;
-      padding-bottom: 10px;
-      width: max-content;
-    }
+  .columna {
+    background-color: #99c2c6;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  }
 
-    .grid-malla-wrapper::-webkit-scrollbar {
-      height: 8px;
-    }
+  .columna h2 {
+    text-align: center;
+    font-size: 18px;
+    color: #49241f;
+    margin-bottom: 10px;
+  }
 
-    .grid-malla-wrapper::-webkit-scrollbar-thumb {
-      background-color: #bd4829;
-      border-radius: 4px;
-    }
+  .ramo {
+    background-color: #fae1ce;
+    color: #49241f;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 6px 0;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Rosario', sans-serif;
+    transition: transform 0.2s ease;
+    width: 100%;
+  }
 
-    .columna {
-      background-color: #99c2c6;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    }
+  .ramo.aprobado {
+    background-color: #f4a590;
+    color: white;
+    font-weight: bold;
+  }
 
-    .columna h2 {
-      text-align: center;
-      font-size: 18px;
-      color: #49241f;
-      margin-bottom: 10px;
-    }
+  .ramo[data-bloqueado="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-    .ramo {
-      background-color: #fae1ce;
-      color: #49241f;
-      border: none;
-      border-radius: 6px;
-      padding: 10px;
-      margin: 6px 0;
-      font-size: 16px;
-      cursor: pointer;
-      font-family: 'Rosario', sans-serif;
-      transition: transform 0.2s ease;
-      width: 100%;
-    }
+  .ramo:hover:not([data-bloqueado="true"]) {
+    transform: scale(1.03);
+  }
 
-    .ramo.aprobado {
-      background-color: #f4a590;
-      color: white;
-      font-weight: bold;
-    }
+  .ramo.destacado {
+    box-shadow: 0 0 10px #f4a590;
+    transform: scale(1.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
 
-    .ramo[data-bloqueado="true"] {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+  .bloque-extra {
+    margin-top: 40px;
+  }
 
-    .ramo:hover:not([data-bloqueado="true"]) {
-      transform: scale(1.03);
-    }
+  .bloque-extra h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #bd4829;
+  }
 
-    .bloque-extra {
-      background-color: #f4a590;
-      padding: 20px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-      border-radius: 10px;
-      max-width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+  .fuego-artificial {
+    position: fixed;
+    z-index: 9999;
+    border-radius: 50%;
+    background-color: gold;
+    box-shadow: 0 0 10px gold, 0 0 20px gold;
+    animation: estallar 0.9s ease-out forwards;
+  }
 
-    .bloque-extra h2 {
-      text-align: center;
-      font-size: 20px;
-      color: white;
-      margin-bottom: 15px;
-      font-family: 'Dancing Script', cursive;
-    }
-
-    .ramo.fundamental,
-    .ramo.optativo {
-      background-color: #fae1ce;
-      color: #49241f;
-      font-size: 16px;
-      margin: 5px;
-    }
-
-    @media (max-width: 768px) {
-      .grid-malla {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        width: 100%;
-      }
-    }
-
-    /* 🌟 Efecto brillante al aprobar */
-    .ramo.destacado {
-      box-shadow: 0 0 10px #f4a590;
-      transform: scale(1.05);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-   .fuego-artificial {
-  position: fixed;
-  z-index: 9999;
-  border-radius: 50%;
-  background-color: #ff4f70;
-  box-shadow: 0 0 10px #ff4f70, 0 0 20px #ff4f70;
-  animation: estallar 0.9s ease-out forwards;
-}
-
-@keyframes estallar {
-  0% { transform: scale(0.6); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.8; }
-  100% { transform: scale(0); opacity: 0; }
-}
-
-    @keyframes volar {
-      0%   { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-60px) scale(1.5); opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <h1 class="titulo">Malla Curricular Derecho</h1>
-
-  <div class="grid-malla-wrapper">
-    <div class="grid-malla">
-      <div class="columna" id="semestre1">
-        <h2>1º Semestre</h2>
-        <button class="ramo">DER1010</button>
-      </div>
-      <div class="columna" id="semestre2">
-        <h2>2º Semestre</h2>
-        <button class="ramo">DER1020</button>
-      </div>
-      <div class="columna" id="semestre3">
-        <h2>3º Semestre</h2>
-        <button class="ramo">DER1030</button>
-      </div>
-      <div class="columna" id="semestre4">
-        <h2>4º Semestre</h2>
-        <button class="ramo">DER1040</button>
-      </div>
-      <div class="columna" id="semestre5">
-        <h2>5º Semestre</h2>
-        <button class="ramo">DER1050</button>
-      </div>
-      <div class="columna" id="semestre6">
-        <h2>6º Semestre</h2>
-        <button class="ramo">DER1060</button>
-      </div>
-      <div class="columna" id="semestre7">
-        <h2>7º Semestre</h2>
-        <button class="ramo">DER1070</button>
-      </div>
-      <div class="columna" id="semestre8">
-        <h2>8º Semestre</h2>
-        <button class="ramo">DER1080</button>
-      </div>
-      <div class="columna" id="semestre9">
-        <h2>9º Semestre</h2>
-        <button class="ramo">DER1090</button>
-      </div>
-      <div class="columna" id="semestre10">
-        <h2>10º Semestre</h2>
-        <button class="ramo">DER1100</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function prerrequisitosCumplidos(prerrequisitos) {
-      return prerrequisitos.every(id => {
-        const ramo = document.getElementById(id);
-        return ramo && ramo.classList.contains('aprobado');
-      });
-    }
-
-    function actualizarEstadoRamos() {
-      const todosLosRamos = document.querySelectorAll('.ramo');
-      todosLosRamos.forEach(boton => {
-        if (boton.classList.contains('aprobado')) {
-          boton.disabled = false;
-          boton.setAttribute('data-bloqueado', 'false');
-          return;
-        }
-
-        const datos = boton.dataset.prerrequisitos;
-        if (datos) {
-          const prerrequisitos = datos.split(',').map(p => p.trim());
-          const habilitado = prerrequisitosCumplidos(prerrequisitos);
-          boton.disabled = !habilitado;
-          boton.setAttribute('data-bloqueado', habilitado ? 'false' : 'true');
-        } else {
-          boton.disabled = false;
-          boton.setAttribute('data-bloqueado', 'false');
-        }
-      });
-    }
-
-    function aprobarRamo(boton) {
-      boton.classList.add('aprobado', 'destacado');
-      boton.disabled = false;
-      boton.setAttribute('data-bloqueado', 'false');
-
-      setTimeout(() => {
-        boton.classList.remove('destacado');
-      }, 1000);
-
-     .fuego-artificial {
-  position: fixed;
-  z-index: 9999;
-  border-radius: 50%;
-  background-color: #ff4f70;
-  box-shadow: 0 0 10px #ff4f70, 0 0 20px #ff4f70;
-  animation: estallar 0.9s ease-out forwards;
-}
-
-@keyframes estallar {
-  0% { transform: scale(0.6); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.8; }
-  100% { transform: scale(0); opacity: 0; }
-}
+  @keyframes estallar {
+    0% { transform: scale(0.6); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+</style>
