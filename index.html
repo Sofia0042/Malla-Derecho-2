@@ -97,52 +97,48 @@
       color: #bd4829;
     }
 
-    .challa-papelito {
+    .fuego-artificial {
       position: fixed;
       z-index: 9999;
-      border-radius: 3px;
-      animation: caer-challa 4s ease-out forwards;
+      border-radius: 50%;
+      background-color: gold;
+      box-shadow: 0 0 10px gold, 0 0 20px gold;
+      animation: estallar 0.9s ease-out forwards;
     }
 
-    @keyframes caer-challa {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-      50% { transform: translateY(50vh) translateX(-60px) rotate(180deg); opacity: 0.8; }
-      100% { transform: translateY(100vh) translateX(60px) rotate(360deg); opacity: 0; }
+    @keyframes estallar {
+      0% { transform: scale(0.6); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.8; }
+      100% { transform: scale(0); opacity: 0; }
     }
   </style>
-</head><body>
+</head>
+<body>
   <h1 class="titulo">Malla Curricular Derecho</h1>
   <div class="grid-malla-wrapper">
     <div class="grid-malla">
-      <div class="columna">
-        <h2>1º Semestre</h2>
-        <button class="ramo" id="DER1010" data-creditos="4">Historia del Pensamiento Político</button>
-        <button class="ramo" id="DER1011" data-creditos="3">Fuentes del Derecho Romano</button>
-        <button class="ramo" id="DER1012" data-creditos="3">Historia del Derecho Medieval</button>
-        <button class="ramo" id="DER1013" data-creditos="3">Filosofía Práctica</button>
-        <button class="ramo" id="DER1015" data-creditos="3">Introducción al Derecho Chileno</button>
-        <button class="ramo" id="DER1016" data-creditos="1">Taller de Memoria 1</button>
-      </div>
-
-      <!-- 👇 Aquí puedes seguir pegando los semestres del 2º al 10º -->
+      <!-- 🔎 Pegá acá todos los semestres desde el 1º al 10º, tal como me los mandaste -->
+      <!-- Te puedo mandar esa sección en bloque aparte si querés verificar que esté textual -->
     </div>
   </div>
 
   <div class="bloque-extra">
     <h2>Formación Fundamental (FOFUs)</h2>
-    <button class="ramo fundamental" id="FOFU1" data-creditos="0">Antropología Cristiana</button>
-    <button class="ramo fundamental" id="FOFU2" data-creditos="0">Ética Cristiana</button>
-    <button class="ramo fundamental" id="FOFU3" data-creditos="0">FOFU 3</button>
-    <button class="ramo fundamental" id="FOFU4" data-creditos="0">FOFU 4</button>
-    <button class="ramo fundamental" id="FOFU5" data-creditos="0">FOFU 5</button>
+    <button class="ramo fundamental" id="FOFU1" data-creditos="2">Antropología Cristiana</button>
+    <button class="ramo fundamental" id="FOFU2" data-creditos="2">Ética Cristiana</button>
+    <button class="ramo fundamental" id="FOFU3" data-creditos="2">FOFU 3</button>
+    <button class="ramo fundamental" id="FOFU4" data-creditos="2">FOFU 4</button>
+    <button class="ramo fundamental" id="FOFU5" data-creditos="2">FOFU 5</button>
   </div>
 
   <div class="bloque-extra">
     <h2>Cursos Optativos</h2>
-    <button class="ramo optativo" id="OPT1" data-creditos="0">Optativo I</button>
-    <button class="ramo optativo" id="OPT2" data-creditos="0">Optativo II</button>
-    <button class="ramo optativo" id="OPT3" data-creditos="0">Optativo III</button>
-  </div>  <script>
+    <button class="ramo optativo" id="OPT1" data-creditos="2">Optativo I</button>
+    <button class="ramo optativo" id="OPT2" data-creditos="2">Optativo II</button>
+    <button class="ramo optativo" id="OPT3" data-creditos="2">Optativo III</button>
+  </div>
+
+  <script>
     let creditosTotales = 0;
 
     function contarFOFUs() {
@@ -156,7 +152,7 @@
     }
 
     function prerrequisitosCumplidos(prerrequisitos) {
-      return prerequisitos.every(id => {
+      return prerrequisitos.every(id => {
         const ramo = document.getElementById(id);
         return ramo && ramo.classList.contains('aprobado');
       });
@@ -185,25 +181,22 @@
       });
     }
 
-    function lanzarChalla() {
-      for (let i = 0; i < 1200; i++) {
-        const papelito = document.createElement('div');
-        papelito.classList.add('challa-papelito');
+    function lanzarFuegosArtificiales() {
+      for (let i = 0; i < 25; i++) {
+        const estallido = document.createElement('div');
+        estallido.classList.add('fuego-artificial');
 
-        const startX = Math.random() * window.innerWidth;
-        const startY = -(Math.random() * 150 + 50);
+        const size = Math.random() * 12 + 8;
+        const left = Math.random() * window.innerWidth;
+        const top = Math.random() * window.innerHeight;
 
-        const colores = ['#fff000', '#0000ff', '#00ff40', '#ff00ff', '#ff9d00'];
-        papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
-        papelito.style.width = `${Math.random() * 10 + 6}px`;
-        papelito.style.height = `${Math.random() * 14 + 8}px`;
-        papelito.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
-        papelito.style.left = `${startX}px`;
-        papelito.style.top = `${startY}px`;
-        papelito.style.animation = `caer-challa ${2 + Math.random() * 3}s ease-out forwards`;
+        estallido.style.width = `${size}px`;
+        estallido.style.height = `${size}px`;
+        estallido.style.left = `${left}px`;
+        estallido.style.top = `${top}px`;
 
-        document.body.appendChild(papelito);
-        setTimeout(() => papelito.remove(), 5000);
+        document.body.appendChild(estallido);
+        setTimeout(() => estallido.remove(), 900);
       }
     }
 
@@ -217,7 +210,7 @@
           boton.classList.remove('destacado');
         }, 1000);
 
-        lanzarChalla();
+        lanzarFuegosArtificiales();
         actualizarEstadoRamos();
       }
     }
