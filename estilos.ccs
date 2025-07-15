@@ -135,13 +135,20 @@
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
-    /* 🎉 Challa animada */
-    .challa {
-      position: absolute;
-      pointer-events: none;
-      font-size: 28px;
-      animation: volar 1s ease-out forwards;
-    }
+   .fuego-artificial {
+  position: fixed;
+  z-index: 9999;
+  border-radius: 50%;
+  background-color: #ff4f70;
+  box-shadow: 0 0 10px #ff4f70, 0 0 20px #ff4f70;
+  animation: estallar 0.9s ease-out forwards;
+}
+
+@keyframes estallar {
+  0% { transform: scale(0.6); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
 
     @keyframes volar {
       0%   { transform: translateY(0) scale(1); opacity: 1; }
@@ -236,18 +243,17 @@
         boton.classList.remove('destacado');
       }, 1000);
 
-      // 🎉 Challa efecto
-      const challa = document.createElement('div');
-      challa.classList.add('challa');
-      challa.textContent = '🎉';
-      document.body.appendChild(challa);
+     .fuego-artificial {
+  position: fixed;
+  z-index: 9999;
+  border-radius: 50%;
+  background-color: #ff4f70;
+  box-shadow: 0 0 10px #ff4f70, 0 0 20px #ff4f70;
+  animation: estallar 0.9s ease-out forwards;
+}
 
-      const rect = boton.getBoundingClientRect();
-      challa.style.left = `${rect.left + rect.width / 2}px`;
-      challa.style.top = `${rect.top}px`;
-
-      setTimeout(() => {
-        challa.remove();
-      }, 1200);
-
-      actualizarEstadoRamos();
+@keyframes estallar {
+  0% { transform: scale(0.6); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
