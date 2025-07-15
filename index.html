@@ -264,8 +264,9 @@
       }
 
       if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
-      if (fofusMin && contarFOFUs() < parse      if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
-      if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
+if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
+if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
+
 
       boton.disabled = !habilitado;
       boton.setAttribute('data-bloqueado', (!habilitado).toString());
