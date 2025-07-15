@@ -1,62 +1,23 @@
 <script>
-  let creditosTotales = 0;
+  function lanzarChalla() {
+    for (let i = 0; i < 1200; i++) {
+      const papelito = document.createElement('div');
+      papelito.classList.add('challa-papelito');
 
-  function contarFOFUs() {
-    return Array.from(document.querySelectorAll('.ramo.fundamental'))
-      .filter(r => r.classList.contains('aprobado')).length;
-  }
+      const startX = Math.random() * window.innerWidth;
+      const startY = -(Math.random() * 150 + 50);
 
-  function contarOptativos() {
-    return Array.from(document.querySelectorAll('.ramo.optativo'))
-      .filter(r => r.classList.contains('aprobado')).length;
-  }
+      const colores = ['#fff000', '#0000ff', '#00ff40', '#ff00ff', '#ff9d00'];
+      papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+      papelito.style.width = `${Math.random() * 10 + 6}px`;
+      papelito.style.height = `${Math.random() * 14 + 8}px`;
+      papelito.style.boxShadow = '0 0 5px rgba(0,0,0,0.2)';
+      papelito.style.left = `${startX}px`;
+      papelito.style.top = `${startY}px`;
+      papelito.style.animation = `caer-challa ${2 + Math.random() * 3}s ease-out forwards`;
 
-  function prerrequisitosCumplidos(prerrequisitos) {
-    return prerrequisitos.every(id => {
-      const ramo = document.getElementById(id);
-      return ramo && ramo.classList.contains('aprobado');
-    });
-  }
-
-  function actualizarEstadoRamos() {
-    document.querySelectorAll('.ramo').forEach(boton => {
-      const datos = boton.dataset.prerrequisitos;
-      const creditosMin = boton.dataset.requiereCreditos;
-      const fofusMin = boton.dataset.requiereFofus;
-      const optativosMin = boton.dataset.requiereOptativos;
-
-      let habilitado = true;
-
-      if (datos) {
-        const prereqs = datos.split(',').map(p => p.trim());
-        if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
-      }
-
-      if (creditosMin && creditosTotales < parseInt(creditosMin)) habilitado = false;
-      if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
-      if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
-
-      boton.disabled = !habilitado;
-      boton.setAttribute('data-bloqueado', (!habilitado).toString());
-    });
-  }
-
-  function lanzarFuegosArtificiales() {
-    for (let i = 0; i < 25; i++) {
-      const estallido = document.createElement('div');
-      estallido.classList.add('fuego-artificial');
-
-      const size = Math.random() * 12 + 8;
-      const left = Math.random() * window.innerWidth;
-      const top = Math.random() * window.innerHeight;
-
-      estallido.style.width = `${size}px`;
-      estallido.style.height = `${size}px`;
-      estallido.style.left = `${left}px`;
-      estallido.style.top = `${top}px`;
-
-      document.body.appendChild(estallido);
-      setTimeout(() => estallido.remove(), 900);
+      document.body.appendChild(papelito);
+      setTimeout(() => papelito.remove(), 5000);
     }
   }
 
@@ -70,19 +31,8 @@
         boton.classList.remove('destacado');
       }, 1000);
 
-      lanzarFuegosArtificiales();
+      lanzarChalla();
       actualizarEstadoRamos();
     }
   }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    actualizarEstadoRamos();
-    document.querySelectorAll('.ramo').forEach(boton => {
-      boton.addEventListener('click', () => {
-        if (boton.getAttribute('data-bloqueado') !== 'true') {
-          aprobarRamo(boton);
-        }
-      });
-    });
-  });
 </script>
