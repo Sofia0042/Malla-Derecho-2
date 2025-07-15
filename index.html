@@ -100,118 +100,11 @@
   </style>
 </head>
 <body>
-  <h1 class="titulo">Malla Curricular Derecho</h1>
-  <div class="grid-malla-wrapper">
-    <div class="grid-malla">
+<h1 class="titulo">Malla Curricular Derecho</h1>
+<div class="grid-malla-wrapper">
+<div class="grid-malla">
 
-<!-- 🧠 AQUÍ VAN TODOS LOS SEMESTRES DEL 1º AL 10º -->
-<!-- Ya te mandé ese bloque en mensajes anteriores con toda la malla, y lo dejamos validado -->
-<!-- No lo pego aquí de nuevo para no saturar el chat, pero si decís "sí", te lo mando todo pegado -->
-
-    </div>
-  </div>
-
-  <div class="bloque-extra">
-    <h2>Formación Fundamental (FOFUs)</h2>
-    <button class="ramo fundamental" id="FOFU1" data-creditos="2">Antropología Cristiana</button>
-    <button class="ramo fundamental" id="FOFU2" data-creditos="2">Ética Cristiana</button>
-    <button class="ramo fundamental" id="FOFU3" data-creditos="2">FOFU 3</button>
-    <button class="ramo fundamental" id="FOFU4" data-creditos="2">FOFU 4</button>
-    <button class="ramo fundamental" id="FOFU5" data-creditos="2">FOFU 5</button>
-  </div>
-
-  <div class="bloque-extra">
-    <h2>Cursos Optativos</h2>
-    <button class="ramo optativo" id="OPT1" data-creditos="2">Optativo I</button>
-    <button class="ramo optativo" id="OPT2" data-creditos="2">Optativo II</button>
-    <button class="ramo optativo" id="OPT3" data-creditos="2">Optativo III</button>
-  </div>
-
-<!-- 🔍 SCRIPT FINAL CON LÓGICA COMPLETA -->
-<script>
-  let creditosTotales = 0;
-
-  function contarFOFUs() {
-    return Array.from(document.querySelectorAll('.ramo.fundamental'))
-      .filter(r => r.classList.contains('aprobado')).length;
-  }
-
-  function contarOptativos() {
-    return Array.from(document.querySelectorAll('.ramo.optativo'))
-      .filter(r => r.classList.contains('aprobado')).length;
-  }
-
-  function contarCreditosMallaPrincipal() {
-    return Array.from(document.querySelectorAll('.ramo:not(.fundamental):not(.optativo)'))
-      .filter(r => r.classList.contains('aprobado'))
-      .reduce((acc, r) => acc + (parseInt(r.dataset.creditos) || 0), 0);
-  }
-
-  function prerrequisitosCumplidos(prerrequisitos) {
-    return prerrequisitos.every(id => {
-      const ramo = document.getElementById(id);
-      return ramo && ramo.classList.contains('aprobado');
-    });
-  }
-
-  function actualizarEstadoRamos() {
-    document.querySelectorAll('.ramo').forEach(boton => {
-      const datos = boton.dataset.prerrequisitos;
-      const creditosMin = boton.dataset.requiereCreditos;
-      const fofusMin = boton.dataset.requiereFofus;
-      const optativosMin = boton.dataset.requiereOptativos;
-
-      let habilitado = true;
-
-      if (datos) {
-        const prereqs = datos.split(',').map(p => p.trim());
-        if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
-      }
-
-      if (creditosMin && contarCreditosMallaPrincipal() < parseInt(creditosMin)) habilitado = false;
-      if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
-      if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
-
-      if (boton.id === "DER1100") {
-        const memoria = document.getElementById("DER1096");
-        if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
-      }
-
-      if (!datos && !creditosMin && !fofusMin && !optativosMin && boton.id !== "DER1100") {
-        habilitado = false;
-      }
-
-      boton.disabled = !habilitado;
-      boton.setAttribute('data-bloqueado', (!habilitado).toString());
-    });
-  }
-
-  function lanzarFuegosArtificiales() {
-    for (let i = 0; i < 25; i++) {
-      const estallido = document.createElement('div');
-      estallido.classList.add('fuego-artificial');
-
-      const size = Math.random() * 12 + 8;
-      const left = Math.random() * window.innerWidth;
-      const top = Math.random() * window.innerHeight;
-
-      estallido.style.width = `${size}px`;
-      estallido.style.height = `${size}px`;
-      estallido.style.left = `${left}px`;
-      estallido.style.top = `${top}px`;
-
-      document.body.appendChild(estallido);
-      setTimeout(() => estallido.remove(), 900);
-    }
-  }
-
-  function aprobarRamo(boton) {
-    if (!boton.classList.contains('aprobado')) {
-      boton.classList.add('aprobado', 'destacado');
-      const creditos = parseInt(boton.dataset.creditos) || 0;
-      creditosTotales += creditos;
-
-     <!-- 1º Semestre -->
+<!-- 1º Semestre -->
 <div class="columna"><h2>1º Semestre</h2>
   <button class="ramo" id="DER1010" data-creditos="4">Historia del Pensamiento Político y Teoría del Estado</button>
   <button class="ramo" id="DER1011" data-creditos="3">Fuentes, Proceso y Bienes en el Derecho Romano</button>
@@ -234,30 +127,30 @@
 
 <!-- 3º Semestre -->
 <div class="columna"><h2>3º Semestre</h2>
-  <button class="ramo" id="DER1030" data-creditos="3" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1020">Derecho Constitucional Orgánico</button>
-  <button class="ramo" id="DER1031" data-creditos="4" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1020">Derecho Internacional Público</button>
-  <button class="ramo" id="DER1032" data-creditos="4" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1021">Negocio Jurídico</button>
-  <button class="ramo" id="DER2034" data-creditos="3" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015">Estrategias de Producción del Discurso Oral</button>
-  <button class="ramo" id="DER1035" data-creditos="3" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1024">Tutela Judicial Efectiva y Debido Proceso</button>
+  <button class="ramo" id="DER1030" data-creditos="3" data-prerrequisitos="DER1020">Derecho Constitucional Orgánico</button>
+  <button class="ramo" id="DER1031" data-creditos="4" data-prerrequisitos="DER1020">Derecho Internacional Público</button>
+  <button class="ramo" id="DER1032" data-creditos="4" data-prerrequisitos="DER1021">Negocio Jurídico</button>
+  <button class="ramo" id="DER2034" data-creditos="3">Estrategias de Producción del Discurso Oral</button>
+  <button class="ramo" id="DER1035" data-creditos="3" data-prerrequisitos="DER1024">Tutela Judicial Efectiva y Debido Proceso</button>
   <button class="ramo" id="DER1036" data-creditos="1" data-prerrequisitos="DER1016">Taller de Memoria 2</button>
   <button class="ramo" id="ING9003" data-creditos="2" data-prerrequisitos="ING9002">Inglés 3</button>
 </div>
 
 <!-- 4º Semestre -->
 <div class="columna"><h2>4º Semestre</h2>
-  <button class="ramo" id="DER1040" data-creditos="3" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1020">Derechos Fundamentales</button>
-  <button class="ramo" id="DER1041" data-creditos="4" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1032,DER1021">Bienes</button>
-  <button class="ramo" id="DER1042" data-creditos="4" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1035">Disposiciones Comunes a Todo Procedimiento</button>
-  <button class="ramo" id="DER1043" data-creditos="4" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015,DER1023">Teoría del Delito</button>
+  <button class="ramo" id="DER1040" data-creditos="3" data-prerrequisitos="DER1030">Derechos Fundamentales</button>
+  <button class="ramo" id="DER1041" data-creditos="4" data-prerrequisitos="DER1032">Bienes</button>
+  <button class="ramo" id="DER1042" data-creditos="4" data-prerrequisitos="DER1035">Disposiciones Comunes a Todo Procedimiento</button>
+  <button class="ramo" id="DER1043" data-creditos="4" data-prerrequisitos="DER1023">Teoría del Delito</button>
   <button class="ramo" id="ING9004" data-creditos="2" data-prerrequisitos="ING9003">Inglés 4</button>
 </div>
 
 <!-- 5º Semestre -->
 <div class="columna"><h2>5º Semestre</h2>
-  <button class="ramo" id="DER1050" data-creditos="3" data-prerrequisitos="DER1030,DER1040">Bases del Derecho Administrativo</button>
+  <button class="ramo" id="DER1050" data-creditos="3" data-prerrequisitos="DER1040">Bases del Derecho Administrativo</button>
   <button class="ramo" id="DER1051" data-creditos="3" data-prerrequisitos="DER1032">Derecho Individual del Trabajo</button>
   <button class="ramo" id="DER1052" data-creditos="3" data-prerrequisitos="DER1040">Derecho y Orden Económico</button>
-  <button class="ramo" id="DER1053" data-creditos="4" data-prerrequisitos="DER1032,DER1041,DER1021">Obligaciones y Contratos</button>
+  <button class="ramo" id="DER1053" data-creditos="4" data-prerrequisitos="DER1041">Obligaciones y Contratos</button>
   <button class="ramo" id="DER1055" data-creditos="4" data-prerrequisitos="DER1043">Responsabilidad Penal</button>
   <button class="ramo" id="DER1056" data-creditos="1" data-prerrequisitos="DER1036">Taller de Memoria 3</button>
   <button class="ramo" id="DER1057" data-creditos="3" data-prerrequisitos="DER1042">Juicio Declarativo y Prueba</button>
@@ -265,14 +158,16 @@
 
 <!-- 6º Semestre -->
 <div class="columna"><h2>6º Semestre</h2>
-  <button class="ramo" id="DER1060" data-creditos="3" data-prerrequisitos="DER1050,DER1032">Actuación de la Administración del Estado</button>
+  <button class="ramo" id="DER1060" data-creditos="3" data-prerrequisitos="DER1050">Actuación de la Administración del Estado</button>
   <button class="ramo" id="DER1061" data-creditos="3" data-prerrequisitos="DER1051">Derecho Colectivo del Trabajo</button>
-  <button class="ramo" id="DER1062" data-creditos="3" data-prerrequisitos="DER1052">Regulación Económica y Derecho de la Libre Competencia</button>
-  <button class="ramo" id="DER1063" data-creditos="4" data-prerrequisitos="DER1053,DER1032,DER1041">Responsabilidad Civil</button>
+  <button class="ramo" id="DER1062" data-creditos="3" data-prerrequisitos="DER1052">Regulación Económica y Libre Competencia</button>
+  <button class="ramo" id="DER1063" data-creditos="4" data-prerrequisitos="DER1053">Responsabilidad Civil</button>
   <button class="ramo" id="DER1064" data-creditos="4" data-prerrequisitos="DER1057">Recursos Procesales</button>
   <button class="ramo" id="DER1065" data-creditos="4" data-prerrequisitos="DER1055">Delito contra Intereses Individuales</button>
   <button class="ramo" id="DER1066" data-creditos="2" data-prerrequisitos="DER1035">Negociación y Resolución de Conflictos</button>
-</div><!-- 7º Semestre -->
+</div>
+
+<!-- 7º Semestre -->
 <div class="columna"><h2>7º Semestre</h2>
   <button class="ramo" id="DER1070" data-creditos="3" data-prerrequisitos="DER1057,DER1060,DER1063">Control y Responsabilidad de la Administración del Estado</button>
   <button class="ramo" id="DER1071" data-creditos="3" data-prerrequisitos="DER1010,DER1011,DER1012,DER1013,DER1015">Introducción al Derecho Comercial y Organización Jurídica de la Empresa</button>
@@ -282,7 +177,7 @@
   <button class="ramo" id="DER1077" data-creditos="3" data-prerrequisitos="DER1064">Ejecución y Tutela Cautelar</button>
 </div>
 
-<!-- 8º Semestre -->
+    <!-- 8º Semestre -->
 <div class="columna"><h2>8º Semestre</h2>
   <button class="ramo" id="DER1075" data-creditos="4" data-prerrequisitos="DER1064,DER1065">Derecho Procesal Penal</button>
   <button class="ramo" id="DER1080" data-creditos="3" data-prerrequisitos="DER1071">Derecho Tributario</button>
@@ -311,4 +206,122 @@
     data-requiereOptativos="3">
     Licenciatura
   </button>
+</div><!-- Formación Fundamental (FOFUs) -->
+<div class="bloque-extra">
+  <h2>Formación Fundamental (FOFUs)</h2>
+  <button class="ramo fundamental" id="FOFU1" data-creditos="2">Antropología Cristiana</button>
+  <button class="ramo fundamental" id="FOFU2" data-creditos="2">Ética Cristiana</button>
+  <button class="ramo fundamental" id="FOFU3" data-creditos="2">FOFU 3</button>
+  <button class="ramo fundamental" id="FOFU4" data-creditos="2">FOFU 4</button>
+  <button class="ramo fundamental" id="FOFU5" data-creditos="2">FOFU 5</button>
 </div>
+
+<!-- Cursos Optativos -->
+<div class="bloque-extra">
+  <h2>Cursos Optativos</h2>
+  <button class="ramo optativo" id="OPT1" data-creditos="2">Optativo I</button>
+  <button class="ramo optativo" id="OPT2" data-creditos="2">Optativo II</button>
+  <button class="ramo optativo" id="OPT3" data-creditos="2">Optativo III</button>
+</div>
+
+<!-- Script final con lógica de desbloqueo -->
+<script>
+let creditosTotales = 0;
+
+function contarFOFUs() {
+  return Array.from(document.querySelectorAll('.ramo.fundamental'))
+    .filter(r => r.classList.contains('aprobado')).length;
+}
+
+function contarOptativos() {
+  return Array.from(document.querySelectorAll('.ramo.optativo'))
+    .filter(r => r.classList.contains('aprobado')).length;
+}
+
+function contarCreditosMallaPrincipal() {
+  return Array.from(document.querySelectorAll('.ramo:not(.fundamental):not(.optativo)'))
+    .filter(r => r.classList.contains('aprobado'))
+    .reduce((acc, r) => acc + (parseInt(r.dataset.creditos) || 0), 0);
+}
+
+function prerrequisitosCumplidos(prerrequisitos) {
+  return prerrequisitos.every(id => {
+    const ramo = document.getElementById(id);
+    return ramo && ramo.classList.contains('aprobado');
+  });
+}
+
+function actualizarEstadoRamos() {
+  document.querySelectorAll('.ramo').forEach(boton => {
+    const datos = boton.dataset.prerrequisitos;
+    const creditosMin = boton.dataset.requiereCreditos;
+    const fofusMin = boton.dataset.requiereFofus;
+    const optativosMin = boton.dataset.requiereOptativos;
+
+    let habilitado = true;
+
+    if (datos) {
+      const prereqs = datos.split(',').map(p => p.trim());
+      if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
+    }
+
+    if (creditosMin && contarCreditosMallaPrincipal() < parseInt(creditosMin)) habilitado = false;
+    if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
+    if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
+
+    if (boton.id === "DER1100") {
+      const memoria = document.getElementById("DER1096");
+      if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
+    }
+
+    if (!datos && !creditosMin && !fofusMin && !optativosMin && boton.id !== "DER1100") {
+      habilitado = false;
+    }
+
+    boton.disabled = !habilitado;
+    boton.setAttribute('data-bloqueado', (!habilitado).toString());
+  });
+}
+
+function lanzarFuegosArtificiales() {
+  for (let i = 0; i < 25; i++) {
+    const estallido = document.createElement('div');
+    estallido.classList.add('fuego-artificial');
+    const size = Math.random() * 12 + 8;
+    estallido.style.width = `${size}px`;
+    estallido.style.height = `${size}px`;
+    estallido.style.left = `${Math.random() * window.innerWidth}px`;
+    estallido.style.top = `${Math.random() * window.innerHeight}px`;
+    document.body.appendChild(estallido);
+    setTimeout(() => estallido.remove(), 900);
+  }
+}
+
+function aprobarRamo(boton) {
+  if (!boton.classList.contains('aprobado')) {
+    boton.classList.add('aprobado', 'destacado');
+    const creditos = parseInt(boton.dataset.creditos) || 0;
+    creditosTotales += creditos;
+    setTimeout(() => {
+      boton.classList.remove('destacado');
+    }, 1000);
+    lanzarFuegosArtificiales();
+    setTimeout(() => {
+      actualizarEstadoRamos();
+    }, 50);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarEstadoRamos();
+  document.querySelectorAll('.ramo').forEach(boton => {
+    boton.addEventListener('click', () => {
+      if (boton.getAttribute('data-bloqueado') !== 'true') {
+        aprobarRamo(boton);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
