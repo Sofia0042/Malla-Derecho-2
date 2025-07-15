@@ -209,7 +209,7 @@
         const startX = Math.random() * window.innerWidth;
         const startY = -(Math.random() * 150 + 50);
 
-        const colores = ['#f4a590', '#fae1ce', '#99c2c6', '#bd4829', '#e1c1d2'];
+        const colores = ['#fff000', '#0000ff', '#00ff40', '#ff00ff', '#ff9d00'];
         papelito.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
         papelito.style.width = `${Math.random() * 10 + 6}px`;
         papelito.style.height = `${Math.random() * 14 + 8}px`;
