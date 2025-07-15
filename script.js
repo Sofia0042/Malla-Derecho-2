@@ -33,26 +33,26 @@
 
       let habilitado = true;
 
-      // 🔍 Evaluar prerrequisitos normales
+      // 🔍 Evaluar prerrequisitos si existen
       if (datos) {
         const prereqs = datos.split(',').map(p => p.trim());
         if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
-      } else {
-        // 🔒 Bloquear si no tiene prerrequisitos explícitos
-        habilitado = false;
       }
 
-      // ✅ Evaluar condiciones de créditos requeridos solo por ramos normales
+      // ✅ Evaluar créditos, FOFUs y Optativos
       if (creditosMin && contarCreditosMallaPrincipal() < parseInt(creditosMin)) habilitado = false;
-
-      // 🎓 Evaluar condiciones adicionales si corresponden
       if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
       if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
 
-      // 🔐 Caso especial: Licenciatura solo si Memoria está aprobada
+      // 👨‍🎓 Licenciatura requiere Memoria aprobada
       if (boton.id === "DER1100") {
         const memoria = document.getElementById("DER1096");
         if (!memoria || !memoria.classList.contains("aprobado")) habilitado = false;
+      }
+
+      // 🔒 Si no tiene ninguna condición, se bloquea por defecto
+      if (!datos && !creditosMin && !fofusMin && !optativosMin && boton.id !== "DER1100") {
+        habilitado = false;
       }
 
       boton.disabled = !habilitado;
@@ -91,7 +91,7 @@
 
       lanzarFuegosArtificiales();
 
-      // ⏳ Delay para que la aprobación se registre antes de evaluar desbloqueo
+      // ⏳ Delay técnico para actualizar correctamente
       setTimeout(() => {
         actualizarEstadoRamos();
       }, 50);
