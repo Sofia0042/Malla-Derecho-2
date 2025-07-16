@@ -1,3 +1,4 @@
+<script>
 let creditosTotales = 0;
 
 function contarFOFUs() {
