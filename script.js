@@ -1,5 +1,11 @@
-<script>
 let creditosTotales = 0;
+
+function calcularCreditosTotales() {
+  creditosTotales = 0;
+  document.querySelectorAll('.ramo.aprobado').forEach(ramo => {
+    creditosTotales += parseInt(ramo.dataset.creditos) || 0;
+  });
+}
 
 function contarFOFUs() {
   return Array.from(document.querySelectorAll('.ramo.fundamental'))
@@ -19,7 +25,7 @@ function prerrequisitosCumplidos(prerrequisitos) {
 }
 
 function tieneCreditosMinimos(ramo) {
-  const creditosMin = ramo.dataset.requiereCreditos || ramo.dataset.requiere_creditos || ramo.dataset.requierecreditos;
+  const creditosMin = ramo.dataset.requiereCreditos;
   if (!creditosMin) return true;
   return creditosTotales >= parseInt(creditosMin);
 }
@@ -27,30 +33,25 @@ function tieneCreditosMinimos(ramo) {
 function actualizarEstadoRamos() {
   document.querySelectorAll('.ramo').forEach(boton => {
     const datos = boton.dataset.prerrequisitos;
-    const creditosMin = boton.dataset.requiereCreditos || boton.dataset.requiere_creditos || boton.dataset.requierecreditos;
-    const fofusMin = boton.dataset.requiereFofus || boton.dataset.requiere_fofus;
-    const optativosMin = boton.dataset.requiereOptativos || boton.dataset.requiere_optativos;
+    const creditosMin = boton.dataset.requiereCreditos;
+    const fofusMin = boton.dataset.requiereFofus;
+    const optativosMin = boton.dataset.requiereOptativos;
 
     let habilitado = true;
 
-    // Revisa prerrequisitos normales (ramos)
     if (datos) {
       const prereqs = datos.split(',').map(p => p.trim());
       if (!prerrequisitosCumplidos(prereqs)) habilitado = false;
     }
 
-    // Revisar créditos mínimos para ramos que los tienen (incluyendo los 3 desbloqueados con prerequisito de créditos)
     if (!tieneCreditosMinimos(boton)) habilitado = false;
 
-    // Revisar FOFUs mínimos aprobados
     if (fofusMin && contarFOFUs() < parseInt(fofusMin)) habilitado = false;
 
-    // Revisar optativos mínimos aprobados
     if (optativosMin && contarOptativos() < parseInt(optativosMin)) habilitado = false;
 
-    // Control especial para Licenciatura: requiere prerrequisitos, FOFUs y optativos todos juntos
     if (boton.id === 'DER1100') {
-      const prerreqs = boton.dataset.prerrequisitos ? boton.dataset.prerrequisitos.split(',').map(p => p.trim()) : [];
+      const prerreqs = datos ? datos.split(',').map(p => p.trim()) : [];
       const cumplePrerreqs = prerrequisitosCumplidos(prerreqs);
       const cumpleFofus = contarFOFUs() >= (parseInt(fofusMin) || 0);
       const cumpleOptativos = contarOptativos() >= (parseInt(optativosMin) || 0);
@@ -97,6 +98,7 @@ function aprobarRamo(boton) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  calcularCreditosTotales();
   actualizarEstadoRamos();
   document.querySelectorAll('.ramo').forEach(boton => {
     boton.addEventListener('click', () => {
